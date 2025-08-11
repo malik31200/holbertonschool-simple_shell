@@ -34,7 +34,7 @@ int main(void)
 		if ((_strcmp(command, "exit\n")) == 0)
 		{
 			free(command);
-			break;
+			exit(0);
 		}
 		simple_shell(command);
 		free(command);
