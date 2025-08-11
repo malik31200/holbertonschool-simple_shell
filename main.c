@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "string.h"
+#include <unistd.h>
+
 /**
  * main - Entry point of the program
  *
@@ -9,20 +11,20 @@
  */
 int main(void)
 {
-	char *command;
-	size_t len;
-	ssize_t read;
+	char *command = NULL;
+	size_t len = 0;
+	ssize_t nRead = -1;
+	int interactive = isatty(STDIN_FILENO);
 
 	while (1)
 	{
-		printf("#cisfun$:");
-		read = getline(&command, &len, stdin);
+		if (interactive)
+			printf("#cisfun$:");
 
-		if (read == -1)
-		{
-			printf("\nError incorrect read \n");
+		nRead = getline(&command, &len, stdin);
+
+		if (nRead == -1)
 			break;
-		}
 
 		if ((_strcmp(command, "exit\n")) == 0)
 		{	
@@ -30,7 +32,6 @@ int main(void)
 		}
 
 		printf("./shell: No such file or directory\n");
-
 	}
 	free(command);
 	return (0);
