@@ -104,7 +104,7 @@ $(OBJDIR)/%.o: tests/%.c | $(OBJDIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 #generating main.o file
-$(OBJDIR)/main.o: main.c | $(OBJDIR)
+$(OBJDIR)/%.o: %.c | $(OBJDIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 #specific test run

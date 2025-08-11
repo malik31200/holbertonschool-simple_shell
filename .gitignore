@@ -1,0 +1,28 @@
+# Ignore everything by default
+*
+
+# Un-ignore all .c files
+!*.c
+
+# Un-ignore specific header files and other needed files
+!binary_trees.h
+!README.md
+!TRELLO_GUIDE.md
+!.gitignore
+!Makefile
+!.gitattributes
+
+# Un-ignore tests folder and all files inside recursively
+!tests/
+!tests/**
+
+# Un-ignore unity folder and all files inside recursively
+!Unity/
+!Unity/**
+
+# Un-ignore holberton folder and all files inside recursively
+!holberton/
+!holberton/**
+
+# Ignore build output folder
+build/
