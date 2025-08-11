@@ -10,6 +10,7 @@
 /* Function declarations */
 char **split_string(char *str);
 void *_realloc(void *ptr, size_t old_size, size_t new_size);
+
 /**
 * simple_shell - a function that deal with shell commands
 * @command: a command line for simple_shell
@@ -51,8 +52,11 @@ int simple_shell(char *command)
 	else
 	{
 		wait(&status);
+		for (i = 0; splitString[i] != NULL; i++)
+			free(splitString[i]);
+		free(splitString);
 	}
-
+	
 	return (0);
 }
 
