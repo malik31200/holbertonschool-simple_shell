@@ -41,7 +41,7 @@ void test_strlen_null(void)
 {
     char *str = NULL;
 
-	printf("Testing : %s\n", str);
+	printf("Testing : NULL\n");
 	printf("Expecting : 0\n");
 	TEST_ASSERT_EQUAL_INT(0, _strlen(str));
 }
