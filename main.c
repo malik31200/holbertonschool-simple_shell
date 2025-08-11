@@ -26,7 +26,7 @@ int main(void)
 		nRead = getline(&command, &len, stdin);
 
 		if (nRead == -1)
-			exit(127);
+			exit(0);
 
 		if ((_strcmp(command, "exit\n")) == 0)
 		{
