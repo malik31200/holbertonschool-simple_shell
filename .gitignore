@@ -11,6 +11,8 @@
 !.gitignore
 !Makefile
 !.gitattributes
+!man_1_simple_shell
+!AUTHORS
 
 # Un-ignore tests folder and all files inside recursively
 !tests/
