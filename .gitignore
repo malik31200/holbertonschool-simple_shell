@@ -16,6 +16,10 @@
 !tests/
 !tests/**
 
+#Un-ignore exercise folder
+!exercice_shell/
+!exercice_shell/*.c
+
 # Un-ignore unity folder and all files inside recursively
 !Unity/
 !Unity/**
