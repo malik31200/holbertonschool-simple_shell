@@ -5,7 +5,7 @@
 !*.c
 
 # Un-ignore specific header files and other needed files
-!binary_trees.h
+!*.h
 !README.md
 !TRELLO_GUIDE.md
 !.gitignore
