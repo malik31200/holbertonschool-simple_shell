@@ -25,11 +25,11 @@ int main(void)
 		}
 
 		if ((_strcmp(command, "exit\n")) == 0)
+		{	
 			break;
+		}
 
-		printf("./shell: No such file or directory");
-		printf("\n");
-	
+		printf("./shell: No such file or directory\n");
 
 	}
 	free(command);
