@@ -28,7 +28,7 @@ int simple_shell(char *command)
 	splitString = split_string(command);
 	if (splitString == NULL)
 	{
-		return (1);
+		return (0);
 	}
 	child = fork();
 	if (child == -1)
