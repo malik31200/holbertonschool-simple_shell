@@ -28,7 +28,6 @@ int simple_shell(char *command)
 	splitString = split_string(command);
 	if (splitString == NULL)
 	{
-		perror("split failed");
 		return (1);
 	}
 	child = fork();
@@ -56,7 +55,7 @@ int simple_shell(char *command)
 			free(splitString[i]);
 		free(splitString);
 	}
-	
+
 	return (0);
 }
 
