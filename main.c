@@ -26,14 +26,19 @@ int main(void)
 		nRead = getline(&command, &len, stdin);
 
 		if (nRead == -1)
+		{
+			free(command);
 			exit(0);
+		}
 
 		if ((_strcmp(command, "exit\n")) == 0)
 		{
+			free(command);
 			break;
 		}
 		simple_shell(command);
+		free(command);
+		command = NULL;
 	}
-	free(command);
 	return (0);
 }

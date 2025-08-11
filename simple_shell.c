@@ -8,7 +8,7 @@
 #include <sys/types.h>
 
 /* Function declarations */
-char **split_string(char *str);
+char **split_string(char *str, char *delimiter);
 void *_realloc(void *ptr, size_t old_size, size_t new_size);
 
 /**
@@ -25,7 +25,7 @@ int simple_shell(char *command)
 	int status;
 	size_t i;
 
-	splitString = split_string(command);
+	splitString = split_string(command, " \t\n");
 	if (splitString == NULL)
 	{
 		return (0);
@@ -42,9 +42,9 @@ int simple_shell(char *command)
 	else if (child == 0)
 	{
 		/* if execve fails */
-		if (execve(splitString[0], splitString, NULL) == -1)
+		if (execve(splitString[0], splitString, environ) == -1)
 		{
-			perror("execve failed");
+			perror(splitString[0]);
 			_exit(127);
 		}
 	}
@@ -64,9 +64,9 @@ int simple_shell(char *command)
  * @str: a string to parse
  *
  * Return: NULL if it fails
- * an array of string sif it succeed
+ * an array of strings if it succeed
  */
-char **split_string(char *str)
+char **split_string(char *str, char *delimiter)
 {
 	char **tokens = NULL, **temp;
 	char *token;
@@ -75,7 +75,7 @@ char **split_string(char *str)
 	if (str == NULL)
 		return (NULL);
 
-	token = strtok(str, " \t\n"); /* getting first token */
+	token = strtok(str, delimiter); /* getting first token */
 	while (token != NULL)
 	{
 		/* reallocating the size needed to add a token and NULL */
@@ -101,7 +101,7 @@ char **split_string(char *str)
 			return (NULL);
 		}
 		/* taking next token */
-		token = strtok(NULL, " \t\n");
+		token = strtok(NULL, delimiter);
 		count++;
 	}
 
