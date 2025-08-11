@@ -82,7 +82,7 @@ void test_right_empty_string(void)
     char *str1 = "Hello";
 	char *str2 = "";
 
-	printf("comparing left empty string\n");
+	printf("comparing right empty string\n");
 	printf("Expecting: > 0\n");
 
 	TEST_ASSERT_TRUE(_strcmp(str1, str2) > 0);
