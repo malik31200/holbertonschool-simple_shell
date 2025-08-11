@@ -1,8 +1,10 @@
 #include "shell.h"
+#include "string_helper.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include "string.h"
 #include <unistd.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 
 /**
  * main - Entry point of the program
@@ -24,14 +26,13 @@ int main(void)
 		nRead = getline(&command, &len, stdin);
 
 		if (nRead == -1)
-			break;
+			exit(127);
 
 		if ((_strcmp(command, "exit\n")) == 0)
 		{
 			break;
 		}
-
-		printf("./shell: No such file or directory\n");
+		simple_shell(command);
 	}
 	free(command);
 	return (0);

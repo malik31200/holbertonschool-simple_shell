@@ -1,5 +1,6 @@
-#include "string.h"
+#include "string_helper.h"
 #include <stddef.h>
+#include <stdlib.h>
 /**
 * _strcmp - a function that compare 2 string
 * @str1: a string
