@@ -84,15 +84,17 @@ int _strncmp(char *str1, char *str2, size_t n)
 {
 	size_t i = 0;
 
-	for (i = 0; i < n && str1[i] != '\0' && str2[i] != '\0'; i++)
+	if (n == 0)
+		return (0);
+
+	for (i = 0; i < n; i++)
 	{
 
-		if (str1[i] < str2[i])
-			return (str1[i] - str2[i]);
-
+		if (str1[i] != str2[i] || str1[i] == '\0' || str2[i] == '\0')
+			return ((unsigned char)str1[i] - (unsigned char)str2[i]);
 	}
 
-	return (str1[i] - str2[i]);
+	return (0);
 }
 
 /**
