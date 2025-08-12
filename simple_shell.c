@@ -10,13 +10,13 @@
 char **path_finder(void);
 
 /**
-* simple_shell - a function that deal with shell commands
-* @command: a command line for simple_shell
-* @shell_name: Name of the shell
-*
-* Return: 0 if succeed
-* 1 if it fails
-*/
+ * simple_shell - a function that deal with shell commands
+ * @command: a command line for simple_shell
+ * @shell_name: Name of the shell
+ *
+ * Return: 0 if succeed
+ * 1 if it fails
+ */
 int simple_shell(char *command, char *shell_name)
 {
 	char **splitString;
@@ -70,14 +70,16 @@ int simple_shell(char *command, char *shell_name)
 		if (path == NULL)
 		{
 			fprintf(stderr, "%s: %s: not found\n",
-            shell_name, splitString[0]);
+					shell_name, splitString[0]);
+			_free_split_string(splitString);
+			return (127);
 		}
 		for (i = 0; path[i] != NULL; i++)
 		{
 			tosearch = NULL;
 			if (path[i][0] == '\0')
 				continue;
-			
+
 			tosearch = _strdup(path[i]);
 			tosearch = strcat_realloc("/", tosearch);
 			if (tosearch == NULL)
@@ -95,34 +97,34 @@ int simple_shell(char *command, char *shell_name)
 				_free_split_string(splitString);
 				return (1);
 			}
-				if (access(tosearch, X_OK) == 0)
+			if (access(tosearch, X_OK) == 0)
+			{
+				child = fork();
+				if (child == -1)
 				{
-					child = fork();
-					if (child == -1)
-					{
-						perror("fork failed");
-						_free_split_string(path);
-						_free_split_string(splitString);
-						return (1);
-					}
-					else if (child == 0)
-					{
-						if (execve(tosearch, splitString, environ) == -1)
-						{
-							perror(tosearch);
-							_exit(127);
-						}
-					}
-					else
-					{
-						wait(&status);
-						_free_split_string(path);
-						_free_split_string(splitString);
-						free(tosearch);
-					}
-					break;
+					perror("fork failed");
+					_free_split_string(path);
+					_free_split_string(splitString);
+					return (1);
 				}
-			
+				else if (child == 0)
+				{
+					if (execve(tosearch, splitString, environ) == -1)
+					{
+						perror(tosearch);
+						_exit(127);
+					}
+				}
+				else
+				{
+					wait(&status);
+					_free_split_string(path);
+					_free_split_string(splitString);
+					free(tosearch);
+				}
+				break;
+			}
+
 		}
 	}
 
@@ -138,11 +140,17 @@ int simple_shell(char *command, char *shell_name)
 char **path_finder(void)
 {
 	size_t i;
+	char *path_copy;
 
 	for (i = 0; environ[i] != NULL; i++)
 	{
 		if (_strncmp("PATH=", environ[i], 5) == 0)
-			return (split_string(environ[i] + 5, ":"));
+		{
+			path_copy = strdup(environ[i]);
+			if (path_copy == NULL)
+				return (NULL);
+			return (split_string(path_copy + 5, ":"));
+		}
 
 	}
 	return (NULL);

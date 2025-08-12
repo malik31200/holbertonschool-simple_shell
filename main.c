@@ -22,7 +22,7 @@ int main(int argc, char **argv)
 	size_t len = 0;
 	ssize_t nRead = -1;
 	int interactive = isatty(STDIN_FILENO);
-	
+
 	(void)argc;
 
 	while (1)
