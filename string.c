@@ -2,13 +2,13 @@
 #include <stddef.h>
 #include <stdlib.h>
 /**
-* _strcmp - a function that compare 2 string
-* @str1: a string
-* @str2: a string
-*
-* Return: the ascii diference of str1 - str2
-* 0 if it similar
-*/
+ * _strcmp - a function that compare 2 string
+ * @str1: a string
+ * @str2: a string
+ *
+ * Return: the ascii diference of str1 - str2
+ * 0 if it similar
+ */
 int _strcmp(char *str1, char *str2)
 {
 	size_t i = 0;
@@ -22,12 +22,12 @@ int _strcmp(char *str1, char *str2)
 }
 
 /**
-* _strlen - return the size of the string
-* @str: a string
-*
-* Return: the size of the string
-* 0 if it's NULL
-*/
+ * _strlen - return the size of the string
+ * @str: a string
+ *
+ * Return: the size of the string
+ * 0 if it's NULL
+ */
 size_t _strlen(char *str)
 {
 	size_t len;
@@ -41,12 +41,12 @@ size_t _strlen(char *str)
 	return (len);
 }
 /**
-* _strdup - return a malloced copy of a string
-* @str: the string to copy
-*
-* Return: a malloced copy of str
-* NULL if it fails
-*/
+ * _strdup - return a malloced copy of a string
+ * @str: the string to copy
+ *
+ * Return: a malloced copy of str
+ * NULL if it fails
+ */
 char *_strdup(char *str)
 {
 	char *res = NULL;
@@ -66,4 +66,27 @@ char *_strdup(char *str)
 
 	res[i] = '\0';
 	return (res);
+}
+/**
+ * _strncmp - a function that compare 2 string until n
+ * @str1: a string
+ * @str2: a string
+ * @n: number of bytes to compare
+ *
+ * Return: the ascii diference of str1 - str2
+ * 0 if it similar
+ */
+int _strncmp(char *str1, char *str2, size_t n)
+{
+	size_t i = 0;
+
+	for (i = 0; i < n && str1[i] != '\0' && str2[i] != '\0'; i++)
+	{
+
+		if (str1[i] < str2[i])
+			return (str1[i] - str2[i])
+
+	}
+
+	return (str1[i] - str2[i]);
 }
