@@ -1,6 +1,9 @@
 #include "string_helper.h"
+#include "utils.h"
 #include <stddef.h>
 #include <stdlib.h>
+#include <string.h>
+
 /**
  * _strcmp - a function that compare 2 string
  * @str1: a string
@@ -85,7 +88,7 @@ int _strncmp(char *str1, char *str2, size_t n)
 	{
 
 		if (str1[i] < str2[i])
-			return (str1[i] - str2[i])
+			return (str1[i] - str2[i]);
 
 	}
 
@@ -95,6 +98,7 @@ int _strncmp(char *str1, char *str2, size_t n)
 /**
  * split_string - split a string into it's components
  * @str: a string to parse
+ * @delimiter: a string containing the delimiters to split the string
  *
  * Return: NULL if it fails
  * an array of strings if it succeed
@@ -137,7 +141,6 @@ char **split_string(char *str, char *delimiter)
 		token = strtok(NULL, delimiter);
 		count++;
 	}
-
 	if (tokens != NULL)
 		tokens[count] = NULL;
 
