@@ -67,3 +67,57 @@ char *_strdup(char *str)
 	res[i] = '\0';
 	return (res);
 }
+
+/**
+ * split_string - split a string into it's components
+ * @str: a string to parse
+ *
+ * Return: NULL if it fails
+ * an array of strings if it succeed
+ */
+char **split_string(char *str, char *delimiter)
+{
+	char **tokens = NULL, **temp;
+	char *token;
+	size_t count = 0, i = 0;
+
+	if (str == NULL)
+		return (NULL);
+
+	token = strtok(str, delimiter); /* getting first token */
+	while (token != NULL)
+	{
+		/* reallocating the size needed to add a token and NULL */
+		temp = _realloc(tokens, sizeof(char *) * count,
+						sizeof(char *) * (count + 2));
+		if (temp == NULL)
+		{
+			/* free allocated memory */
+			for (i = 0; i < count; i++)
+				free(tokens[i]);
+			free(tokens);
+			return (NULL);
+		}
+		tokens = temp;
+		tokens[count] = _strdup(token);
+		if (tokens[count] == NULL)
+		{
+			/* free allocated memory */
+			for (i = 0; i < count; i++)
+				free(tokens[i]);
+
+			free(tokens);
+			return (NULL);
+		}
+		/* taking next token */
+		token = strtok(NULL, delimiter);
+		count++;
+	}
+
+	if (tokens != NULL)
+		tokens[count] = NULL;
+
+	return (tokens);
+}
+
+
