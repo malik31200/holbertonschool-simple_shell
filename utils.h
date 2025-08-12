@@ -4,5 +4,6 @@
 
 /* --- Utility functions --- */
 void *_realloc(void *ptr, size_t old_size, size_t new_size);
+void _free_split_string(char **string_arr);
 
 #endif /* MY_UTILS_H */

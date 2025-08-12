@@ -11,15 +11,19 @@ void parse_new_line(char *str);
 
 /**
  * main - Entry point of the program
+ *@argc: Number of arguments
+ *@argv: Array containing the arguments
  *
  * Return: Always 0 (Success)
  */
-int main(void)
+int main(int argc, char **argv)
 {
 	char *command = NULL;
 	size_t len = 0;
 	ssize_t nRead = -1;
 	int interactive = isatty(STDIN_FILENO);
+	
+	(void)argc;
 
 	while (1)
 	{
@@ -44,7 +48,7 @@ int main(void)
 			free(command);
 			exit(0);
 		}
-		simple_shell(command);
+		simple_shell(command, argv[0]);
 		free(command);
 		command = NULL;
 	}

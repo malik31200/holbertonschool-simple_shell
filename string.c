@@ -31,7 +31,7 @@ int _strcmp(char *str1, char *str2)
  * Return: the size of the string
  * 0 if it's NULL
  */
-size_t _strlen(char *str)
+size_t _strlen(const char *str)
 {
 	size_t len;
 
