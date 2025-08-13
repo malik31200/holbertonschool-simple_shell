@@ -14,4 +14,7 @@ int execute_no_path(char **commands, char *shell_name);
 int execute_path(char **commands, char *shell_name);
 int execute_command(char *command, char **commands);
 
+/* --- builtins utilities --- */
+int run_builtins(char *command);
+
 #endif /* MY_SHELL_H */

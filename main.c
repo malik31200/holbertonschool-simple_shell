@@ -43,11 +43,8 @@ int main(int argc, char **argv)
 			command = NULL;
 			continue;
 		}
-		if ((_strcmp(command, "exit")) == 0)
-		{
-			free(command);
-			exit(0);
-		}
+		if (run_builtins(command) == 1)
+			continue;
 		simple_shell(command, argv[0]);
 		free(command);
 		command = NULL;
