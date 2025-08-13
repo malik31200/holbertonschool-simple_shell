@@ -30,16 +30,15 @@ int execute_command(char *command, char **commands)
 		if (execve(command, commands, environ) == -1)
 		{
 			perror("execve failed");
-			_free_split_string(commands);
-			perror("execve failed");
 			_exit(127);
 		}
 	}
 	else
 	{
 		waitpid(child, &status, 0);
-		_free_split_string(commands);
 	}
+
+	_free_split_string(commands);
 
 	if (WIFEXITED(status))
 		return (WEXITSTATUS(status));
