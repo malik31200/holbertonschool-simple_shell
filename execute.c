@@ -49,6 +49,7 @@ int execute_path(char **commands, char *shell_name)
 	char **path;
 	size_t i;
 	char *command, *temp;
+	int ret;
 
 	path = path_finder();
 	if (path == NULL)
@@ -96,7 +97,9 @@ int execute_path(char **commands, char *shell_name)
 		if (access(command, F_OK | X_OK) == 0)
 		{
 			_free_split_string(path);
-			return (execute_command(command, commands));
+			ret = execute_command(command, commands);
+			free(command);
+			return (ret);
 		}
 		free(command);
 		command = NULL;
