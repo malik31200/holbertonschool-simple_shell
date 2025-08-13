@@ -23,7 +23,7 @@ int run_builtins(char *command)
 	commands = split_string(command, " \n\t");
 	if (_strcmp(commands[0], "exit") == 0)
 	{
-		if(commands[1] != NULL && is_number(commands[1]))
+		if (commands[1] != NULL && is_number(commands[1]))
 		{
 			code = atoi(commands[1]);
 			free(command);
@@ -38,7 +38,7 @@ int run_builtins(char *command)
 	{
 		for (i = 0; environ[i] != NULL; i++)
 			printf("%s\n", environ[i]);
-		
+
 		_free_split_string(commands);
 		return (1);
 	}
@@ -51,14 +51,14 @@ int run_builtins(char *command)
 * is_number - a function that returns if a string is a number
 * @str: a string to test
 *
-* Retrun: 0 if it's not a number
+* Return: 0 if it's not a number
 * 1 if it is
 */
 int is_number(char *str)
 {
 	size_t i;
 
-	if(str == NULL || str[0] == '\0')
+	if (str == NULL || str[0] == '\0')
 		return (0);
 
 	for (i = 0; str[i] != '\0'; i++)
