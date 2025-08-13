@@ -5,8 +5,6 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
-#include <sys/wait.h>
-#include <sys/types.h>
 char **path_finder(void);
 
 /**
@@ -14,145 +12,25 @@ char **path_finder(void);
  * @command: a command line for simple_shell
  * @shell_name: Name of the shell
  *
- * Return: 0 if succeed
- * 1 if it fails
+ * Return: exit codes
  */
 int simple_shell(char *command, char *shell_name)
 {
-	char **splitString;
-	pid_t child;
-	int status;
-	size_t i;
-	char **path;
-	char *tosearch;
+	char **commands;
 
-	splitString = split_string(command, " \t\n");
-	if (splitString == NULL)
+	commands = split_string(command, " \t\n");
+	if (commands == NULL)
 	{
 		return (0);
 	}
-	if (splitString[0][0] == '/' || splitString[0][0] == '.')
+	if (commands[0][0] == '/' || commands[0][0] == '.')
 	{
-		if (access(splitString[0], F_OK) == -1)
-		{
-			fprintf(stderr, "%s: %s: not found\n", shell_name, command);
-			return (127);
-		}
-		if (access(splitString[0], X_OK) == -1)
-		{
-			fprintf(stderr, "%s: %s: Permission denied\n", shell_name, command);
-			return (126);
-		}
-		child = fork();
-		if (child == -1)
-		{
-			perror("fork failed");
-			_free_split_string(splitString);
-			return (1);
-		}
-		else if (child == 0)
-		{
-			if (execve(splitString[0], splitString, environ) == -1)
-			{
-				perror(splitString[0]);
-				_exit(127);
-			}
-		}
-		else
-		{
-			wait(&status);
-			_free_split_string(splitString);
-		}
+		return (execute_no_path(commands, shell_name));
 	}
 	else
 	{
-		path = path_finder();
-		if (path == NULL)
-		{
-			fprintf(stderr, "%s: %s: not found\n",
-					shell_name, splitString[0]);
-			_free_split_string(splitString);
-			return (127);
-		}
-		for (i = 0; path[i] != NULL; i++)
-		{
-			tosearch = NULL;
-			if (path[i][0] == '\0')
-				continue;
-
-			tosearch = _strdup(path[i]);
-			tosearch = strcat_realloc("/", tosearch);
-			if (tosearch == NULL)
-			{
-				perror("realloc failed");
-				_free_split_string(path);
-				_free_split_string(splitString);
-				return (1);
-			}
-			tosearch = strcat_realloc(splitString[0], tosearch);
-			if (tosearch == NULL)
-			{
-				perror("realloc failed");
-				_free_split_string(path);
-				_free_split_string(splitString);
-				return (1);
-			}
-			if (access(tosearch, X_OK) == 0)
-			{
-				child = fork();
-				if (child == -1)
-				{
-					perror("fork failed");
-					_free_split_string(path);
-					_free_split_string(splitString);
-					return (1);
-				}
-				else if (child == 0)
-				{
-					if (execve(tosearch, splitString, environ) == -1)
-					{
-						perror(tosearch);
-						_exit(127);
-					}
-				}
-				else
-				{
-					wait(&status);
-					_free_split_string(path);
-					_free_split_string(splitString);
-					free(tosearch);
-				}
-				break;
-			}
-
-		}
+		return (execute_path(commands, shell_name));
 	}
-
-	return (0);
 }
 
-/**
- * path_finder - Find the path
- *
- * Return: NULL if not find
- * The path directory if found
- */
-char **path_finder(void)
-{
-	size_t i;
-	char *path_copy;
-
-	for (i = 0; environ[i] != NULL; i++)
-	{
-		if (_strncmp("PATH=", environ[i], 5) == 0)
-		{
-			path_copy = strdup(environ[i]);
-			if (path_copy == NULL)
-				return (NULL);
-			return (split_string(path_copy + 5, ":"));
-		}
-
-	}
-	return (NULL);
-}
 
