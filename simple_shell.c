@@ -20,17 +20,11 @@ int simple_shell(char *command, char *shell_name)
 
 	commands = split_string(command, " \t\n");
 	if (commands == NULL)
-	{
 		return (0);
-	}
 	if (commands[0][0] == '/' || commands[0][0] == '.')
-	{
 		return (execute_no_path(commands, shell_name));
-	}
 	else
-	{
 		return (execute_path(commands, shell_name));
-	}
 }
 
 

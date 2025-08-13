@@ -57,6 +57,9 @@ void *_realloc(void *ptr, size_t old_size, size_t new_size)
 void _free_split_string(char **string_arr)
 {
 	size_t i;
+	
+	if (string_arr == NULL)
+		return;
 
 	for (i = 0; string_arr[i] != NULL; i++)
 		free(string_arr[i]);

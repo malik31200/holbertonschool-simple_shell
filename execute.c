@@ -78,31 +78,28 @@ int execute_path(char **commands, char *shell_name)
 			if (temp == NULL)
 			{
 				perror("strcat failed");
-				free(command);
 				_free_split_string(commands);
 				_free_split_string(path);
 				return (1);
 			}
 			command = temp;
-			temp = NULL;
 		}
 		temp = strcat_realloc(commands[0], command);
 		if (temp == NULL)
 		{
 			perror("strcat failed");
-			free(command);
 			_free_split_string(commands);
 			_free_split_string(path);
 			return (1);
 		}
 		command = temp;
-		temp = NULL;
 		if (access(command, F_OK | X_OK) == 0)
 		{
 			_free_split_string(path);
 			return (execute_command(command, commands));
 		}
 		free(command);
+		command = NULL;
 	}
 	fprintf(stderr, "%s: %s: not found\n", shell_name, commands[0]);
 	_free_split_string(commands);

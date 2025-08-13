@@ -23,7 +23,6 @@ int execute_command(char *command, char **commands)
 	{
 		perror("fork failed");
 		_free_split_string(commands);
-		free(command);
 		return (1);
 	}
 	else if (child == 0)
@@ -31,7 +30,6 @@ int execute_command(char *command, char **commands)
 		if (execve(command, commands, environ) == -1)
 		{
 			perror("execve failed");
-			free(command);
 			_free_split_string(commands);
 			perror("execve failed");
 			_exit(127);
@@ -41,7 +39,6 @@ int execute_command(char *command, char **commands)
 	{
 		waitpid(child, &status, 0);
 		_free_split_string(commands);
-		free(command);
 	}
 
 	if (WIFEXITED(status))
