@@ -7,6 +7,7 @@
 
 /* Function declarations */
 char **path_finder(void);
+char *build_path(char *command, char *path);
 
 /**
  * execute_no_path - execute a command without a path search
@@ -43,13 +44,15 @@ int execute_no_path(char **commands, char *shell_name)
  *
  * Return: 1 if it fails
  * exit code if it succed
+ * 127 if file not founds
+ * 126 if file found but not executable
  */
 int execute_path(char **commands, char *shell_name)
 {
 	char **path;
 	size_t i;
-	char *command, *temp;
-	int ret;
+	char *command;
+	int ret = 127;
 
 	path = path_finder();
 	if (path == NULL)
@@ -61,53 +64,36 @@ int execute_path(char **commands, char *shell_name)
 	for (i = 0; path[i] != NULL; i++)
 	{
 		command = NULL;
-		if (path[i][0] == '\0')
-			command = _strdup(".");
-		else
-			command = _strdup(path[i]);
-
+		command = build_path(commands[0], path[i]);
 		if (command == NULL)
 		{
-			perror("strdup failed");
-			_free_split_string(commands);
-			_free_split_string(path);
-			return (1);
+			ret = 1;
+			break;
 		}
-		if (command[_strlen(command) - 1] != '/')
+		if (access(command, F_OK) == 0)
 		{
-			temp = strcat_realloc("/", command);
-			if (temp == NULL)
+			if (access(command, X_OK) == 0)
 			{
-				perror("strcat failed");
-				_free_split_string(commands);
-				_free_split_string(path);
-				return (1);
+				ret = execute_command(command, commands);
+				free(command);
+				break;
 			}
-			command = temp;
-		}
-		temp = strcat_realloc(commands[0], command);
-		if (temp == NULL)
-		{
-			perror("strcat failed");
-			_free_split_string(commands);
-			_free_split_string(path);
-			return (1);
-		}
-		command = temp;
-		if (access(command, F_OK | X_OK) == 0)
-		{
-			_free_split_string(path);
-			ret = execute_command(command, commands);
-			free(command);
-			return (ret);
+			else
+			{
+				fprintf(stderr, "%s: %s: permission denied\n", shell_name, commands[0]);
+				free(command);
+				ret = 126;
+				break;
+			}
 		}
 		free(command);
-		command = NULL;
 	}
-	fprintf(stderr, "%s: %s: not found\n", shell_name, commands[0]);
+	if (ret == 127)
+		fprintf(stderr, "%s: %s: not found\n", shell_name, commands[0]);
+
 	_free_split_string(commands);
 	_free_split_string(path);
-	return (1);
+	return (ret);
 }
 
 /**
@@ -139,3 +125,47 @@ char **path_finder(void)
 	return (NULL);
 }
 
+/**
+* built_path - a function that returns a built path of a command
+* @command: a command like 'ls'
+* @path: a path like '/bin'
+*
+* Return: NULL if it fails
+* the fully built path if it suceed
+*/
+char *build_path(char *command, char *path)
+{
+	char *built_path, *temp;
+
+	if (path[0] == '\0')
+		built_path = _strdup(".");
+	else
+		built_path = _strdup(path);
+
+	if (built_path == NULL)
+	{
+		perror("strdup failed");
+		return (NULL);
+	}
+
+	if (built_path[_strlen(built_path) - 1] != '/')
+	{
+		temp = strcat_realloc("/", built_path);
+		if (temp == NULL)
+		{
+			free(built_path);
+			perror("strcat failed");
+			return (NULL);
+		}
+		built_path = temp;
+	}
+	temp = strcat_realloc(command, built_path);
+	if (temp == NULL)
+	{
+		free(built_path);
+		perror("strcat failed");
+		return (NULL);
+	}
+	free(built_path);
+	return (temp);
+}
