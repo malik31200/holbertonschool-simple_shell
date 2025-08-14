@@ -1,16 +1,18 @@
 #include "string_helper.h"
 #include "utils.h"
+#include <stdlib.h>
+
 /**
- * strcat_realloc - Append src to dest
+ * _strcat - Append src to dest
  * @src: the string to append
  * @dest: the string to append into
  *
  * Return: NULL if malloc failed
  * appended string
  */
-char *strcat_realloc(const char *src, char *dest)
+char *_strcat(const char *src, char *dest)
 {
-	size_t i;
+	size_t i, j;
 	size_t size_dest = dest ? _strlen(dest) : 0;
 	size_t size_src = src ? _strlen(src) : 0;
 	char *temp;
@@ -18,21 +20,16 @@ char *strcat_realloc(const char *src, char *dest)
 	if (src == NULL || size_src == 0)
 		return (dest);
 
-	if (dest == NULL)
-	{
-		temp = _realloc(dest, 0, size_src + 1);
-		if (temp == NULL)
-			return (NULL);
-	}
-	else
-	{
-		temp = _realloc(dest, size_dest + 1, size_src + size_dest + 1);
-		if (temp == NULL)
-			return (NULL);
-	}
-	for (i = 0; i < size_src; i++)
-		temp[i + size_dest] = src[i];
+	temp = malloc(size_dest + size_src + 1);
+	if (temp == NULL)
+		return (NULL);
 
-	temp[i + size_dest] = '\0';
+	for (i = 0; i < size_dest; i++)
+		temp[i] = dest[i];
+
+	for(j = 0; i + j < size_dest + size_src; j++)
+		temp[i + j] = src[j];
+
+	temp[i + j] = '\0';
 	return (temp);
 }

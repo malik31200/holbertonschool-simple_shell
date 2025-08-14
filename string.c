@@ -3,6 +3,8 @@
 #include <stddef.h>
 #include <stdlib.h>
 #include <string.h>
+/* function declarations */
+int tok_length(char *str, char *delimiter);
 
 /**
  * _strcmp - a function that compare 2 string
@@ -107,44 +109,74 @@ int _strncmp(char *str1, char *str2, size_t n)
  */
 char **split_string(char *str, char *delimiter)
 {
-	char **tokens = NULL, **temp;
-	char *token;
-	size_t count = 0, i = 0;
+	char **tokens = NULL;
+	char *token, *copy;
+	size_t count = 0, lenTok = 0;
 
 	if (str == NULL)
 		return (NULL);
 
-	token = strtok(str, delimiter); /* getting first token */
+	copy = _strdup(str);
+	if (copy == NULL)
+		return (NULL);
+
+	lenTok = tok_length(str, delimiter);
+	if (lenTok == 0)
+	{
+		free(copy);
+		return (NULL);
+	}
+	tokens = malloc(sizeof(char *) * (lenTok + 1));
+	if (tokens == NULL)
+	{
+		free(copy);
+		return (NULL);
+	}
+
+	token = strtok(copy, delimiter); /* getting first token */
 	while (token != NULL)
 	{
-		/* reallocating the size needed to add a token and NULL */
-		temp = _realloc(tokens, sizeof(char *) * count,
-						sizeof(char *) * (count + 2));
-		if (temp == NULL)
-		{
-			/* free allocated memory */
-			for (i = 0; i < count; i++)
-				free(tokens[i]);
-			free(tokens);
-			return (NULL);
-		}
-		tokens = temp;
 		tokens[count] = _strdup(token);
-		if (tokens[count] == NULL)
+		if(tokens[count] == NULL)
 		{
-			/* free allocated memory */
-			for (i = 0; i < count; i++)
-				free(tokens[i]);
-
-			free(tokens);
+			free(copy);
+			_free_split_string(tokens);
 			return (NULL);
 		}
-		/* taking next token */
 		token = strtok(NULL, delimiter);
 		count++;
 	}
-	if (tokens != NULL)
-		tokens[count] = NULL;
 
+	tokens[count] = NULL;
+	free(copy);
 	return (tokens);
+}
+
+/**
+ * tok_length - a function that returns how many tokens will be generated
+ * @str: a string to tokenise
+ * @delimiter: the delimiter of for strtok calls
+ *
+ * Return: 0 on failure
+ * the number of token on success
+ */
+int tok_length(char *str, char *delimiter)
+{
+	char *copy, *token;
+	size_t nbTok = 0;
+
+	copy = _strdup(str);
+	if (copy == NULL)
+		return (0);
+
+	token = strtok(copy, delimiter); /* getting first token */
+	while (token != NULL)
+	{
+		/* taking next token */
+		token = strtok(NULL, delimiter);
+		nbTok++;
+	}
+
+	free(copy);
+	return (nbTok);
 }

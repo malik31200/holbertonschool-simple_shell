@@ -91,7 +91,6 @@ int execute_path(char **commands, char *shell_name)
 	if (ret == 127)
 		fprintf(stderr, "%s: %s: not found\n", shell_name, commands[0]);
 
-	_free_split_string(commands);
 	_free_split_string(path);
 	return (ret);
 }
@@ -150,7 +149,7 @@ char *build_path(char *command, char *path)
 
 	if (built_path[_strlen(built_path) - 1] != '/')
 	{
-		temp = strcat_realloc("/", built_path);
+		temp = _strcat("/", built_path);
 		if (temp == NULL)
 		{
 			free(built_path);
@@ -159,7 +158,7 @@ char *build_path(char *command, char *path)
 		}
 		built_path = temp;
 	}
-	temp = strcat_realloc(command, built_path);
+	temp = _strcat(command, built_path);
 	if (temp == NULL)
 	{
 		free(built_path);
