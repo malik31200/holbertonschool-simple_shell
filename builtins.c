@@ -30,6 +30,13 @@ int run_builtins(char *command)
 			_free_split_string(commands);
 			exit(code);
 		}
+		if (commands[1] != NULL && !is_number(commands[1]))
+		{
+			free(command);
+			fprintf(stderr, "exit: %s: numeric argument required\n", commands[1]);
+			_free_split_string(commands);
+			exit(2);
+		}
 		_free_split_string(commands);
 		free(command);
 		exit(0);
