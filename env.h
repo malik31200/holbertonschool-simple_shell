@@ -7,6 +7,6 @@ extern char **environ;
 /* --- environ utilities --- */
 char **get_env(void);
 char *get_env_var(const char *var);
-
+void print_env(void);
 
 #endif /* MY_ENV_H */

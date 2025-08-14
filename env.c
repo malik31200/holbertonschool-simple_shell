@@ -30,9 +30,25 @@ char *get_env_var(const char *var)
 	len = strlen(var);
 	for (i = 0; environ[i] != NULL; i++)
 	{
-		if(strncmp(var, environ[i], len) == 0 && environ[i][len] == '=')
+		if (strncmp(var, environ[i], len) == 0 && environ[i][len] == '=')
 			return (environ[i]);
 	}
 
 	return (NULL);
+}
+
+/**
+* print_env - prints the environ variable if it's not null
+*
+* Return: void
+*/
+void print_env(void)
+{
+	size_t i;
+
+	if (environ == NULL)
+		return;
+
+	for (i = 0; environ[i] != NULL; i++)
+		printf("%s\n", environ[i]);
 }
