@@ -25,6 +25,7 @@ int main(int argc, char **argv)
 	ssize_t nRead = -1;
 	int interactive = isatty(STDIN_FILENO);
 
+	signal(SIGINT, handle_sigint);
 	(void)argc;
 
 	while (1)
@@ -32,7 +33,6 @@ int main(int argc, char **argv)
 		if (interactive)
 			printf("($) ");
 
-		signal(SIGINT, handle_sigint);
 		nRead = getline(&command, &len, stdin);
 		if (nRead == -1)
 		{

@@ -1,4 +1,4 @@
-# Title
+# 🐚 Simple shell
 
 ## 🔖 Table of contents
 
@@ -56,6 +56,10 @@ The goal of the project is to make a simple shell that should run in ubuntu LTS 
 | `folder_name`     | Description of the folder.                        |
 | `.gitignore`      | Specifies files and folders to be ignored by Git. |
 | `README.md`       | The README file you are currently reading 😉.     |
+| `README.md`       | The README file you are currently reading 😉.     |
+| `README.md`       | The README file you are currently reading 😉.     |
+| `README.md`       | ATHOR     |
+
 
 ## 💻 <span id="installation">Installation</span>
 
@@ -83,8 +87,9 @@ gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh
 
 ## ♥️ <span id="thanks">Thanks</span>
 
-- Thanks for nothing this project was a nightmare...
-- apparently you get shutdown if you do too much
+- Thanks for everything this project was a nightmare 😮‍💨
+- apparently you get shutdown if you do too much 🫠
+- prep vanished
 
 ## 👷 <span id="authors">Authors</span>
 
