@@ -24,13 +24,11 @@ int execute_no_path(char **commands, char *shell_name)
 	if (access(commands[0], F_OK) == -1)
 	{
 		fprintf(stderr, "%s: %s: not found\n", shell_name, commands[0]);
-		_free_split_string(commands);
 		return (127);
 	}
 	if (access(commands[0], X_OK) == -1)
 	{
 		fprintf(stderr, "%s: %s: Permission denied\n", shell_name, commands[0]);
-		_free_split_string(commands);
 		return (126);
 	}
 	return (execute_command(commands[0], commands));
@@ -58,7 +56,6 @@ int execute_path(char **commands, char *shell_name)
 	if (path == NULL)
 	{
 		fprintf(stderr, "%s: %s: not found\n", shell_name, commands[0]);
-		_free_split_string(commands);
 		return (127);
 	}
 	for (i = 0; path[i] != NULL; i++)
@@ -150,9 +147,9 @@ char *build_path(char *command, char *path)
 	if (built_path[_strlen(built_path) - 1] != '/')
 	{
 		temp = _strcat("/", built_path);
+		free(built_path);
 		if (temp == NULL)
 		{
-			free(built_path);
 			perror("strcat failed");
 			return (NULL);
 		}

@@ -23,7 +23,6 @@ int execute_command(char *command, char **commands)
 	if (child == -1)
 	{
 		perror("fork failed");
-		_free_split_string(commands);
 		return (1);
 	}
 	else if (child == 0)
@@ -38,8 +37,6 @@ int execute_command(char *command, char **commands)
 	{
 		waitpid(child, &status, 0);
 	}
-
-	_free_split_string(commands);
 
 	if (WIFEXITED(status))
 		return (WEXITSTATUS(status));
