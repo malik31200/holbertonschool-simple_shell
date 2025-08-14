@@ -36,3 +36,24 @@ char *strcat_realloc(const char *src, char *dest)
 	temp[i + size_dest] = '\0';
 	return (temp);
 }
+
+/**
+ * _strchr - Function that found a character given
+ * 
+ */
+ char *_strchr(const char *str, int c)
+{
+
+	while (*str != '\0')
+	{
+		if (*str == (char)c)
+			{
+				return (char *)str;
+			}
+		str++;
+	}
+	if ((char)c == '\0')
+		return (char *)str;
+		
+	return (NULL);
+}

@@ -6,6 +6,8 @@
 #include <unistd.h>
 #include <string.h>
 char **path_finder(void);
+char *_strchr(const char *str, int c);
+
 
 /**
  * simple_shell - a function that deal with shell commands
@@ -35,14 +37,16 @@ int simple_shell(char *command, char *shell_name)
 		return (status);
 	}
 
-	if (commands[0][0] == '/' || commands[0][0] == '.')
+	if (_strchr(commands[0], '/'))
 	{
-		return (execute_no_path(commands, shell_name));
+		status = (execute_no_path(commands, shell_name));
 	}
 	else
 	{
-		return (execute_path(commands, shell_name));
+		status = (execute_path(commands, shell_name));
 	}
+	_free_split_string(commands);
+	return (status);
 }
 
 
