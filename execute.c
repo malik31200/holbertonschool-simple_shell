@@ -49,6 +49,7 @@ int execute_path(char **commands, char *shell_name)
 	char **path;
 	size_t i;
 	char *command, *temp;
+	int status;
 
 	path = path_finder();
 	if (path == NULL)
@@ -84,7 +85,6 @@ int execute_path(char **commands, char *shell_name)
 				return (1);
 			}
 			command = temp;
-			temp = NULL;
 		}
 		temp = strcat_realloc(commands[0], command);
 		if (temp == NULL)
@@ -96,18 +96,20 @@ int execute_path(char **commands, char *shell_name)
 			return (1);
 		}
 		command = temp;
-		temp = NULL;
-		if (access(command, F_OK | X_OK) == 0)
+		if (access(command, X_OK) == 0)
 		{
 			_free_split_string(path);
-			return (execute_command(command, commands));
+			status = execute_command(command, commands);
+			free(command);
+			_free_split_string(commands);
+			return (status);
 		}
 		free(command);
 	}
 	fprintf(stderr, "%s: %s: not found\n", shell_name, commands[0]);
 	_free_split_string(commands);
 	_free_split_string(path);
-	return (1);
+	return (127);
 }
 
 /**

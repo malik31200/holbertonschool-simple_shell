@@ -17,12 +17,24 @@ char **path_finder(void);
 int simple_shell(char *command, char *shell_name)
 {
 	char **commands;
+	int status = 0;
 
 	commands = split_string(command, " \t\n");
 	if (commands == NULL)
 	{
 		return (0);
 	}
+	if (commands[0] == NULL)
+	{
+		_free_split_string(commands);
+		return(0);
+	}
+	if (run_builtins(commands, &status))
+	{
+		_free_split_string(commands);
+		return (status);
+	}
+
 	if (commands[0][0] == '/' || commands[0][0] == '.')
 	{
 		return (execute_no_path(commands, shell_name));
