@@ -7,7 +7,7 @@
 * get_env - summons the cursed environment variable from the void
 *
 * Return: the dark string if it answers your call
-* 		  NULL if the void refuses
+*		  NULL if the void refuses
 */
 char **get_env(void)
 {
@@ -19,7 +19,7 @@ char **get_env(void)
 * @var: the the cursed variable to seek
 *
 * Return: the string if found in the abyss
-* 		 NULL if the void swallows it
+*		  NULL if the void swallows it
 */
 char *get_env_var(const char *var)
 {
@@ -41,7 +41,7 @@ char *get_env_var(const char *var)
 
 /**
 * print_env - summons the environment variables from the abyss
-* 
+*
 * Return: void; if the void is empty, silence reigns
 */
 void print_env(void)
