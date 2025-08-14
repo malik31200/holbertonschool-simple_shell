@@ -125,7 +125,7 @@ char **path_finder(void)
 }
 
 /**
-* built_path - a function that returns a built path of a command
+* build_path - a function that returns a built path of a command
 * @command: a command like 'ls'
 * @path: a path like '/bin'
 *

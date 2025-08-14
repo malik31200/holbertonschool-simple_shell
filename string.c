@@ -137,7 +137,7 @@ char **split_string(char *str, char *delimiter)
 	while (token != NULL)
 	{
 		tokens[count] = _strdup(token);
-		if(tokens[count] == NULL)
+		if (tokens[count] == NULL)
 		{
 			free(copy);
 			_free_split_string(tokens);
@@ -152,31 +152,3 @@ char **split_string(char *str, char *delimiter)
 	return (tokens);
 }
 
-/**
- * tok_length - a function that returns how many tokens will be generated
- * @str: a string to tokenise
- * @delimiter: the delimiter of for strtok calls
- *
- * Return: 0 on failure
- * the number of token on success
- */
-int tok_length(char *str, char *delimiter)
-{
-	char *copy, *token;
-	size_t nbTok = 0;
-
-	copy = _strdup(str);
-	if (copy == NULL)
-		return (0);
-
-	token = strtok(copy, delimiter); /* getting first token */
-	while (token != NULL)
-	{
-		/* taking next token */
-		token = strtok(NULL, delimiter);
-		nbTok++;
-	}
-
-	free(copy);
-	return (nbTok);
-}

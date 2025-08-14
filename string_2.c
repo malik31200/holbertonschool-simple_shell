@@ -27,9 +27,39 @@ char *_strcat(const char *src, char *dest)
 	for (i = 0; i < size_dest; i++)
 		temp[i] = dest[i];
 
-	for(j = 0; i + j < size_dest + size_src; j++)
+	for (j = 0; i + j < size_dest + size_src; j++)
 		temp[i + j] = src[j];
 
 	temp[i + j] = '\0';
 	return (temp);
 }
+
+/**
+ * tok_length - a function that returns how many tokens will be generated
+ * @str: a string to tokenise
+ * @delimiter: the delimiter of for strtok calls
+ *
+ * Return: 0 on failure
+ * the number of token on success
+ */
+int tok_length(char *str, char *delimiter)
+{
+	char *copy, *token;
+	size_t nbTok = 0;
+
+	copy = _strdup(str);
+	if (copy == NULL)
+		return (0);
+
+	token = strtok(copy, delimiter); /* getting first token */
+	while (token != NULL)
+	{
+		/* taking next token */
+		token = strtok(NULL, delimiter);
+		nbTok++;
+	}
+
+	free(copy);
+	return (nbTok);
+}
+
