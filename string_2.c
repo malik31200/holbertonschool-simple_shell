@@ -1,6 +1,8 @@
 #include "string_helper.h"
 #include "utils.h"
+#include <stddef.h>
 #include <stdlib.h>
+#include <string.h>
 
 /**
  * _strcat - Append src to dest
