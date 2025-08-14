@@ -1,5 +1,7 @@
 #include "env.h"
 #include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 /**
 * get_env - returns the environement system variable
@@ -51,4 +53,15 @@ void print_env(void)
 
 	for (i = 0; environ[i] != NULL; i++)
 		printf("%s\n", environ[i]);
+}
+
+/**
+* path_finder - it found the path and the doom in it
+*
+* Return: the PATH is yours
+* NULL if it's not found
+*/
+char *path_finder(void)
+{
+	return (get_env_var("PATH"));
 }
