@@ -92,7 +92,6 @@ int execute_path(char **commands, char *shell_name)
 	if (ret == 127)
 		fprintf(stderr, "%s: %s: not found\n", shell_name, commands[0]);
 
-	_free_split_string(commands);
 	_free_split_string(path);
 	return (ret);
 }
@@ -127,7 +126,7 @@ char **path_finder(void)
 }
 
 /**
-* built_path - a function that returns a built path of a command
+* build_path - a function that returns a built path of a command
 * @command: a command like 'ls'
 * @path: a path like '/bin'
 *
@@ -161,7 +160,6 @@ char *build_path(char *command, char *path)
 			return (NULL);
 		}
 		built_path = temp;
-	}
 	temp = strcat_realloc(built_path, command);
 	if (temp == NULL)
 	{
