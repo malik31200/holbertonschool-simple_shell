@@ -21,6 +21,15 @@ int run_builtins(char *command)
 	int code;
 
 	commands = split_string(command, " \n\t");
+	if (commands == NULL)
+		return 0;
+
+	if (commands[0] == NULL)
+	{
+		_free_split_string(commands);
+		return 0;
+    }
+
 	if (_strcmp(commands[0], "exit") == 0)
 	{
 		if (commands[1] != NULL && is_number(commands[1]))

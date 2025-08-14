@@ -8,7 +8,7 @@
  * Return: NULL if malloc failed
  * appended string
  */
-char *strcat_realloc(const char *src, char *dest)
+char *strcat_realloc(char *dest, const char *src)
 {
 	size_t i;
 	size_t size_dest = dest ? _strlen(dest) : 0;
