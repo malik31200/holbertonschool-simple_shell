@@ -8,6 +8,6 @@ size_t _strlen(const char *str);
 char *_strdup(char *str);
 char **split_string(char *str, char *delimiter);
 int _strncmp(char *str1, char *str2, size_t n);
-char *_strcat(const char *src, char *dest);
+char *_strcat(char *dest, const char *src);
 
 #endif /* MY_STRING_H */

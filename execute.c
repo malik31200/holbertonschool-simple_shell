@@ -146,7 +146,7 @@ char *build_path(char *command, char *path)
 
 	if (built_path[_strlen(built_path) - 1] != '/')
 	{
-		temp = _strcat("/", built_path);
+		temp = _strcat(built_path, "/");
 		free(built_path);
 		if (temp == NULL)
 		{
@@ -155,7 +155,7 @@ char *build_path(char *command, char *path)
 		}
 		built_path = temp;
 	}
-	temp = _strcat(command, built_path);
+	temp = _strcat(built_path, command);
 	if (temp == NULL)
 	{
 		free(built_path);

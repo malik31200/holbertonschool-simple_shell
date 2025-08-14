@@ -12,7 +12,7 @@
  * Return: NULL if malloc failed
  * appended string
  */
-char *_strcat(const char *src, char *dest)
+char *_strcat(char *dest, const char *src)
 {
 	size_t i, j;
 	size_t size_dest = dest ? _strlen(dest) : 0;
