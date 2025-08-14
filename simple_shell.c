@@ -29,7 +29,7 @@ int simple_shell(char *command, char *shell_name)
 	if (commands[0] == NULL)
 	{
 		_free_split_string(commands);
-		return(0);
+		return (0);
 	}
 	if (run_builtins(commands, &status))
 	{

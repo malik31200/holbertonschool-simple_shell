@@ -8,13 +8,13 @@
 #include <errno.h>
 
 /**
-* execute_command - execute a command
-* @command: a command to execute
-* @commands: the command and its parameters
-*
-* Return: 1 if it fails,
-* child exit code if it succeed
-*/
+ * execute_command - execute a command
+ * @command: a command to execute
+ * @argv: the command and its parameters
+ *
+ * Return: 1 if it fails,
+ * child exit code if it succeed
+ */
 int execute_command(char *command, char **argv)
 {
 	pid_t child;
@@ -33,6 +33,7 @@ int execute_command(char *command, char **argv)
 		if (execve(command, argv, environ) == -1)
 		{
 			int e = errno;
+
 			perror("execve failed");
 			_free_split_string(argv);
 			_exit(e == ENOENT ? 127 : 126);
@@ -44,7 +45,7 @@ int execute_command(char *command, char **argv)
 		{
 		}
 	}
-		_free_split_string(argv);
+	_free_split_string(argv);
 
 	if (WIFEXITED(status))
 		return (WEXITSTATUS(status));

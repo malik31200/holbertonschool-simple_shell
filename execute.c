@@ -55,7 +55,6 @@ int execute_path(char **commands, char *shell_name)
 	if (path == NULL)
 	{
 		fprintf(stderr, "%s: %s: not found\n", shell_name, commands[0]);
-		_free_split_string(commands);
 		return (127);
 	}
 	for (i = 0; path[i] != NULL; i++)

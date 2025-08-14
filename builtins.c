@@ -4,13 +4,16 @@
 #include <stdio.h>
 
 /**
- * 
+ * builtin_env - Prints all environnement
+ * @argv: Command
+ *
+ * Return: 0 on success
  */
 int builtin_env(char **argv)
 {
 	size_t i, len;
 
-    (void)argv;
+	(void)argv;
 
 	for (i = 0; environ[i] != NULL; i++)
 	{
@@ -22,17 +25,26 @@ int builtin_env(char **argv)
 }
 
 /**
- * 
+ * run_builtins - Cheks if a command matches a buit-in and excecutes
+ * @commands: Array of strings
+ * @status: Pointer
+ *
+ * Return: 1 if command is recognize and execute
+ * 0 if no match
  */
 int run_builtins(char **commands, int *status)
 {
-    int st;
+	int st;
+	int handled = 0;
 
-    if (commands == NULL || commands[0] == NULL)
-        return (0);
-    if (_strcmp(commands[0], "env") == 0)
-        st = builtin_env(commands);
-    if (status != NULL)
-        *status = st;
-    return (1);
+	if (commands == NULL || commands[0] == NULL)
+		return (0);
+	if (_strcmp(commands[0], "env") == 0)
+	{
+		st = builtin_env(commands);
+		handled = 1;
+	}
+	if (handled && status != NULL)
+		*status = st;
+	return (handled);
 }
