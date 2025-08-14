@@ -4,10 +4,10 @@
 #include <stdlib.h>
 
 /**
-* get_env - returns the environement system variable
+* get_env - summons the cursed environment variable from the void
 *
-* Return: the environement system variable if it succeed
-* NULL if it fails
+* Return: the dark string if it answers your call
+* 		  NULL if the void refuses
 */
 char **get_env(void)
 {
@@ -15,11 +15,11 @@ char **get_env(void)
 }
 
 /**
-* get_env_var - searches for a vairable in environ
-* @var: the variable to search
+* get_env_var - probes the dark corners of the environment for a variable
+* @var: the the cursed variable to seek
 *
-* Return: the string containing the variable
-* NULL if it fails
+* Return: the string if found in the abyss
+* 		 NULL if the void swallows it
 */
 char *get_env_var(const char *var)
 {
@@ -40,9 +40,9 @@ char *get_env_var(const char *var)
 }
 
 /**
-* print_env - prints the environ variable if it's not null
-*
-* Return: void
+* print_env - summons the environment variables from the abyss
+* 
+* Return: void; if the void is empty, silence reigns
 */
 void print_env(void)
 {
@@ -56,10 +56,9 @@ void print_env(void)
 }
 
 /**
-* path_finder - it found the path and the doom in it
+* path_finder - the quest for the PATH ends here
 *
-* Return: the PATH is yours
-* NULL if it's not found
+* Return: the PATH if fate allows, NULL if cursed
 */
 char *path_finder(void)
 {
