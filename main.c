@@ -5,9 +5,11 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <signal.h>
 
 /* --- Function declarations --- */
 void parse_new_line(char *str);
+void handle_sigint(int sig);
 
 /**
  * main - Entry point of the program
@@ -30,6 +32,7 @@ int main(int argc, char **argv)
 		if (interactive)
 			printf("($) ");
 
+		signal(SIGINT, handle_sigint);
 		nRead = getline(&command, &len, stdin);
 		if (nRead == -1)
 		{
@@ -70,4 +73,17 @@ void parse_new_line(char *str)
 			break;
 		}
 	}
+}
+
+/**
+* handle_sigint - a function to handle signals
+* @sig: a signal
+*
+* Return: void;
+*/
+void handle_sigint(int sig)
+{
+	(void)sig;
+	write(1, "\n($) ", 5);
+	fflush(stdout);
 }
