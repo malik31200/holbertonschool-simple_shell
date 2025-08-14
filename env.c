@@ -4,84 +4,102 @@
 #include <stdlib.h>
 
 /**
-* get_env - summons the cursed environment variable from the void
+* get_env - summons the cursed spirits of the environment from the void
 *
-* Return: the dark string if it answers your call
-*		  NULL if the void refuses
+* Descend into the ethereal plane and conjure a mortal copy of all
+* environment strings. Beware, each string is a fragment of the void.
+*
+* Return: a mortal copy of the abyssal strings if they heed your call,
+*         NULL if the void remains silent.
 */
 char **get_env(void)
 {
 	char **copy;
-	size_t i;
+	size_t i, len;
 
 	if (environ == NULL)
 		return (NULL);
 
-	for (i = 0; environ[i] != NULL; i++)
+	for (len = 0; environ[len] != NULL; len++)
 		;
 
-	copy = malloc(sizeof(char *) * (i + 1));
+	copy = malloc(sizeof(char *) * (len + 1));
 	if (copy == NULL)
 		return (NULL);
 
 	for (i = 0; environ[i] != NULL; i++)
+	{
 		copy[i] = strdup(environ[i]);
-
+		if (copy[i] == NULL)
+		{
+			/* The void rejected one of the fragments, banish all previous */
+			free_char_arr(copy);
+			return (NULL);
+		}
+	}
 	copy[i] = NULL;
 	return (copy);
 }
 
 /**
-* get_env_var - probes the dark corners of the environment for a variable
-* @var: the the cursed variable to seek
+* get_env_var - probes the dark corners of the environment
+* for a forsaken variable
+* @var: the cursed sigil to seek in the abyss
 *
-* Return: the string if found in the abyss
-*		  NULL if the void swallows it
+* Traverse the haunted corridors of the copied environment, searching
+* for a variable marked by @var. Only the worthy shall receive a mortal copy.
+*
+* Return: the string if it dares emerge from the void,
+*         NULL if the abyss swallows it whole.
+*
+* Note: Caller must free the returned string
 */
 char *get_env_var(const char *var)
 {
-	char **copy_environ = get_env();
-	char *copy;
 	size_t i, len;
 
-	if (var == NULL || copy_environ == NULL)
+	if (var == NULL || environ == NULL)
 		return (NULL);
 
 	len = strlen(var);
-	for (i = 0; copy_environ[i] != NULL; i++)
+	for (i = 0; environ[i] != NULL; i++)
 	{
-		if (strncmp(var, copy_environ[i], len) == 0 && copy_environ[i][len] == '=')
-		{
-			copy = strdup(copy_environ[i]);
-			free_char_arr(copy_environ);
-			return (copy);
-		}
+		if (strncmp(var, environ[i], len) == 0 && environ[i][len] == '=')
+			return (strdup(environ[i] + len + 1)); /* Skip past "VAR=" */
 	}
 
-	free_char_arr(copy_environ);
 	return (NULL);
 }
 
 /**
-* print_env - summons the environment variables from the abyss
+* print_env - invokes the spirits to reveal all environmental secrets
 *
-* Return: void; if the void is empty, silence reigns
+* Summons every forsaken variable from the void and lays them bare
+* before mortal eyes. If the void is empty, silence reigns eternal.
+*
+* Return: nothing; the void may speak, or remain mute.
 */
 void print_env(void)
 {
 	size_t i;
+	char **copy_environ = get_env();
 
-	if (environ == NULL)
+	if (copy_environ == NULL)
 		return;
 
-	for (i = 0; environ[i] != NULL; i++)
-		printf("%s\n", environ[i]);
+	for (i = 0; copy_environ[i] != NULL; i++)
+		printf("%s\n", copy_environ[i]);
+
+	free_char_arr(copy_environ);
 }
 
 /**
-* path_finder - the quest for the PATH ends here
+* path_finder - embarks on the heroic quest for the legendary PATH
 *
-* Return: the PATH if fate allows, NULL if cursed
+* Brave the void in search of the sacred PATH variable. Only those
+* who dare may glimpse its eternal flame.
+*
+* Return: the PATH if fate deems it worthy, NULL if cursed.
 */
 char *path_finder(void)
 {
