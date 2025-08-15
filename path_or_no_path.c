@@ -114,7 +114,6 @@ char *build_command(char *path, char *command)
 
 	strcat(built_command, command);
 
-	printf("%s\n", built_command);
 	return (built_command);
 }
 
