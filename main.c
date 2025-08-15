@@ -1,9 +1,9 @@
 #include "shell.h"
-#include "string_helper.h"
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
 #include <stddef.h>
+#include <string.h>
 /**
  * main - Entry point of the program.
  * @argc: Number of the arguments
@@ -47,7 +47,7 @@ int main(int argc, char **argv)
 		if (*blank == '\0')
 			continue;
 
-		if (_strcmp(blank, "exit") == 0)
+		if (strcmp(blank, "exit") == 0)
 			break;
 	}
 	free(line);
