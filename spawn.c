@@ -24,8 +24,6 @@ int execute_command(char *command, char **argv)
 	if (child == -1)
 	{
 		perror("fork failed");
-		_free_split_string(argv);
-		free(command);
 		return (1);
 	}
 	else if (child == 0)
@@ -35,7 +33,6 @@ int execute_command(char *command, char **argv)
 			int e = errno;
 
 			perror("execve failed");
-			_free_split_string(argv);
 			_exit(e == ENOENT ? 127 : 126);
 		}
 	}
@@ -45,7 +42,6 @@ int execute_command(char *command, char **argv)
 		{
 		}
 	}
-	_free_split_string(argv);
 
 	if (WIFEXITED(status))
 		return (WEXITSTATUS(status));

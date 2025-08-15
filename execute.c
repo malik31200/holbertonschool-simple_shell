@@ -23,13 +23,11 @@ int execute_no_path(char **commands, char *shell_name)
 	if (access(commands[0], F_OK) == -1)
 	{
 		fprintf(stderr, "%s: %s: not found\n", shell_name, commands[0]);
-		_free_split_string(commands);
 		return (127);
 	}
 	if (access(commands[0], X_OK) == -1)
 	{
 		fprintf(stderr, "%s: %s: Permission denied\n", shell_name, commands[0]);
-		_free_split_string(commands);
 		return (126);
 	}
 	return (execute_command(commands[0], commands));
@@ -68,7 +66,6 @@ int execute_path(char **commands, char *shell_name)
 		if (command == NULL)
 		{
 			perror("strdup failed");
-			_free_split_string(commands);
 			_free_split_string(path);
 			return (1);
 		}
@@ -79,7 +76,6 @@ int execute_path(char **commands, char *shell_name)
 			{
 				perror("strcat failed");
 				free(command);
-				_free_split_string(commands);
 				_free_split_string(path);
 				return (1);
 			}
@@ -90,8 +86,6 @@ int execute_path(char **commands, char *shell_name)
 		{
 			perror("strcat failed");
 			free(command);
-			_free_split_string(commands);
-			_free_split_string(path);
 			return (1);
 		}
 		command = temp;
@@ -100,13 +94,11 @@ int execute_path(char **commands, char *shell_name)
 			_free_split_string(path);
 			status = execute_command(command, commands);
 			free(command);
-			_free_split_string(commands);
 			return (status);
 		}
 		free(command);
 	}
 	fprintf(stderr, "%s: %s: not found\n", shell_name, commands[0]);
-	_free_split_string(commands);
 	_free_split_string(path);
 	return (127);
 }
