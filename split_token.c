@@ -10,9 +10,10 @@ int lenght_tok(const char *line, const char *delimiter);
  * split_token - Split a string
  * @line: Line of command.
  *
- * Return: 0 if success
+ * Return: NULL if failed
+ * an array of strings if success.
  */
-int split_token(char *line)
+char **split_token(char *line)
 
 {
 	char **argv = NULL;
@@ -21,7 +22,7 @@ int split_token(char *line)
 	int n;
 
 	if (line == NULL || *line == '\0')
-		return (0);
+		return (NULL);
 
 	n = lenght_tok(line, " \t");
 	if (n <= 0)
@@ -30,14 +31,14 @@ int split_token(char *line)
 	argv = malloc((n + 1) * sizeof(char *));
 	if (argv == NULL)
 	{
-		perror ("malloc failed");
-		return (-1);
+		perror("malloc failed");
+		return (NULL);
 	}
 	copy = strdup(line);
 	if (copy == NULL)
 	{
 		free(argv);
-		return (-1);
+		return (NULL);
 	}
 
 	tok = strtok(copy, " \t");
@@ -51,14 +52,14 @@ int split_token(char *line)
 				i--;
 				free(argv[i]);
 				free(copy);
-				return (-1);
+				return (NULL);
 			}
 		}
 		tok = strtok(NULL, " \t");
 	}
 	argv[i] = NULL;
 	free(copy);
-	return(0);
+	return (argv);
 }
 
 /**

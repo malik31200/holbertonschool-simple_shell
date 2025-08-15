@@ -12,11 +12,11 @@
  */
 int main(int argc, char **argv)
 {
-	char *line = NULL;
+	char *line = NULL, *blank, **args = NULL;
 	ssize_t n = -1;
 	size_t len = 0;
 	int interactive = isatty(STDIN_FILENO);
-	char *blank;
+	int i = 0;
 
 	(void)argc;
 	(void)argv;
@@ -32,14 +32,12 @@ int main(int argc, char **argv)
 		/* EOF - exit ctrl + d */
 		if (n == -1)
 			break;
-
 		/* remove the final '\n' */
 		if (n > 0 && line[n - 1] == '\n')
 		{
 			line[n - 1] = '\0';
 			n--;
 		}
-
 		/* handle the blank */
 		blank = line;
 		while (*blank == ' ' || *blank == '\t')
@@ -49,6 +47,12 @@ int main(int argc, char **argv)
 
 		if (strcmp(blank, "exit") == 0)
 			break;
+
+		args = split_token(blank);
+		execute_command(args);
+		for (i = 0; args[i] != NULL; i++)
+			free(args[i]);
+		free(args);
 	}
 	free(line);
 	return (0);
