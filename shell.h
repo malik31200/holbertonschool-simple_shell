@@ -5,7 +5,7 @@
 
 extern char **environ;
 
-int execute_nopath(char *line);
-int split_arg(const char *line, const char *delimiter);
+int split_token(char *line);
+int lenght_tok(const char *line, const char *delimiter);
 
 #endif
