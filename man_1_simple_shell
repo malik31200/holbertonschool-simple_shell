@@ -1,28 +1,41 @@
 .\" Manpage for SimpleShell
 .TH SIMPLESHELL 1 "August 2025" "1.0" "Simple Shell Manual"
 .SH NAME
-SimpleShell \- a minimal shell to run commands and view environment variables
+SimpleShell \- a minimal shell to execute commands and display environment variables
 .SH SYNOPSIS
 .B simpleshell
 [\fICOMMAND\fR ...]
 .SH DESCRIPTION
-SimpleShell is a lightweight shell that can execute commands found in the system PATH or by absolute path, and provides two built-in commands: \fBexit\fR and \fBenv\fR.
+SimpleShell is a lightweight command-line shell designed to execute programs available in the system \fPATH\fR or by absolute path.  
+It also provides two built-in commands: \fBexit\fR and \fBenv\fR.  
 .PP
-It does not support advanced shell features such as pipes, I/O redirection, or background execution.
-.SH COMMANDS
+This shell is intended for simple usage and educational purposes. Advanced shell features like pipes, redirection, background jobs, and scripting are not supported.
+.SH BUILT-IN COMMANDS
 .TP
 .B exit
 Exits the shell.
 .TP
 .B env
 Displays the current environment variables.
-.TP
-.B external commands
-Any executable in the PATH or specified with an absolute path can be run with arguments.
-.SH EXAMPLES
-Run a command in PATH:
+.SH EXTERNAL COMMANDS
+Any executable located in the system \fPATH\fR or specified by absolute path can be run with arguments.  
+.PP
+Example:
 .RS
 ($) ls -l
+.RE
+.SH OPTIONS
+This shell does not support traditional command-line options. Commands are entered interactively at the prompt.
+.SH EXAMPLES
+.PP
+Start the shell:
+.RS
+$ ./simpleshell
+($) 
+.RE
+Run a command:
+.RS
+($) whoami
 .RE
 Display environment variables:
 .RS
@@ -37,6 +50,11 @@ Exit the shell:
 - No support for pipes (\fB|\fR) or I/O redirection (\fB>\fR, \fB<\fR)  
 - No background execution (\fB&\fR)  
 - Only one command per line  
-- No scripting support or shell expansions
+- No shell scripting support or expansions
+.SH BUGS
+No known bugs. Designed for educational and minimal usage.
+.SH SEE ALSO
+bash(1), sh(1)
 .SH AUTHOR
 Written by Adel Mejrissi.
+
