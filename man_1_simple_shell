@@ -1,0 +1,42 @@
+.\" Manpage for SimpleShell
+.TH SIMPLESHELL 1 "August 2025" "1.0" "Simple Shell Manual"
+.SH NAME
+SimpleShell \- a minimal shell to run commands and view environment variables
+.SH SYNOPSIS
+.B simpleshell
+[\fICOMMAND\fR ...]
+.SH DESCRIPTION
+SimpleShell is a lightweight shell that can execute commands found in the system PATH or by absolute path, and provides two built-in commands: \fBexit\fR and \fBenv\fR.
+.PP
+It does not support advanced shell features such as pipes, I/O redirection, or background execution.
+.SH COMMANDS
+.TP
+.B exit
+Exits the shell.
+.TP
+.B env
+Displays the current environment variables.
+.TP
+.B external commands
+Any executable in the PATH or specified with an absolute path can be run with arguments.
+.SH EXAMPLES
+Run a command in PATH:
+.RS
+($) ls -l
+.RE
+Display environment variables:
+.RS
+($) env
+.RE
+Exit the shell:
+.RS
+($) exit
+.RE
+.SH LIMITATIONS
+.PP
+- No support for pipes (\fB|\fR) or I/O redirection (\fB>\fR, \fB<\fR)  
+- No background execution (\fB&\fR)  
+- Only one command per line  
+- No scripting support or shell expansions
+.SH AUTHOR
+Written by Adel Mejrissi.
