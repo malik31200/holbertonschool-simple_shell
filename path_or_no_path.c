@@ -81,7 +81,7 @@ int find_the_path(char **argv)
 	if (ret == 127)
 		fprintf(stderr, "%s: command not found\n", argv[0]);
 	if (ret == 126)
-		fprintf(stderr, "%s: command not found\n", argv[0]);
+		fprintf(stderr, "%s: permission denied\n", argv[0]);
 
 	free_char_arr(arr_path);
 	return (ret);
