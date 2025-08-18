@@ -21,7 +21,6 @@ int main(int argc, char **argv)
 	(void)argc;
 	(void)argv;
 
-	/* Print $ in interactif mode */
 	while (1)
 	{
 		if (interactive)
@@ -29,7 +28,6 @@ int main(int argc, char **argv)
 
 		n = getline(&line, &len, stdin);
 
-		/* EOF - exit ctrl + d */
 		if (n == -1)
 			break;
 		/* remove the final '\n' */
@@ -38,7 +36,6 @@ int main(int argc, char **argv)
 			line[n - 1] = '\0';
 			n--;
 		}
-		/* handle the blank */
 		blank = line;
 		while (*blank == ' ' || *blank == '\t')
 			blank++;
@@ -47,7 +44,6 @@ int main(int argc, char **argv)
 
 		if (strcmp(blank, "exit") == 0)
 			break;
-
 		args = split_token(blank);
 		execute_command(args);
 		for (i = 0; args[i] != NULL; i++)
