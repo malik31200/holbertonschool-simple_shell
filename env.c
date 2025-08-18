@@ -72,28 +72,6 @@ char *get_env_var(const char *var)
 }
 
 /**
-* print_env - invokes the spirits to reveal all environmental secrets
-*
-* Summons every forsaken variable from the void and lays them bare
-* before mortal eyes. If the void is empty, silence reigns eternal.
-*
-* Return: nothing; the void may speak, or remain mute.
-*/
-void print_env(void)
-{
-	size_t i;
-	char **copy_environ = get_env();
-
-	if (copy_environ == NULL)
-		return;
-
-	for (i = 0; copy_environ[i] != NULL; i++)
-		printf("%s\n", copy_environ[i]);
-
-	free_char_arr(copy_environ);
-}
-
-/**
 * path_finder - embarks on the heroic quest for the legendary PATH
 *
 * Brave the void in search of the sacred PATH variable. Only those
