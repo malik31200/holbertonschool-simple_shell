@@ -45,6 +45,14 @@ int main(int argc, char **argv)
 		if (strcmp(blank, "exit") == 0)
 			break;
 		args = split_token(blank);
+		if (args[0] != NULL && strcmp(args[0], "env") == 0)
+		{
+			print_env();
+		for (i = 0; args[i] != NULL; i++)
+			free(args[i]);
+		free(args);
+		continue;
+		}
 		execute_command(args);
 		for (i = 0; args[i] != NULL; i++)
 			free(args[i]);
