@@ -24,7 +24,7 @@ int main(int argc, char **argv)
 	while (1)
 	{
 		if (interactive)
-			printf("($) ");
+			write(STDOUT_FILENO,"($) ", 4);
 
 		n = getline(&line, &len, stdin);
 
