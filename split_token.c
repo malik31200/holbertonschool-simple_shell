@@ -51,8 +51,8 @@ char **split_token(char *line, char *delimiter)
 			{
 				i--;
 				free(argv[i]);
-				free(copy);
 			}
+		free(copy);
 		free(argv);
 		return (NULL);
 		}
