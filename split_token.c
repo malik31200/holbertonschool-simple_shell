@@ -46,10 +46,10 @@ char **split_token(char *line, char *delimiter)
 	{
 		clean_tok = tok;
 		if (tok[0] == '"' && tok[strlen(tok) - 1] == '"' && strlen(tok) > 1)
-			{
-				tok[strlen(tok) - 1] = '\0';
-				clean_tok = tok + 1;
-			}
+		{
+			tok[strlen(tok) - 1] = '\0';
+			clean_tok = tok + 1;
+		}
 		argv[i] = strdup(clean_tok);
 		if (argv[i]  == NULL)
 		{
@@ -65,6 +65,7 @@ char **split_token(char *line, char *delimiter)
 		tok = strtok(NULL, delimiter);
 	}
 	argv[i] = NULL;
+	free(copy);
 	return (argv);
 }
 
