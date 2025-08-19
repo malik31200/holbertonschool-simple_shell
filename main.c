@@ -1,8 +1,8 @@
 #include "shell.h"
+#include "env.h"
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
-#include <stddef.h>
 #include <string.h>
 /**
  * main - Entry point of the program.
@@ -12,16 +12,15 @@
  */
 int main(int argc, char **argv)
 {
-	char *line = NULL, *blank, **args = NULL;
+	char *line = NULL, **args = NULL;
 	ssize_t n = -1;
 	size_t len = 0;
 	int interactive = isatty(STDIN_FILENO);
-	int i = 0;
+	int status;
 
 	(void)argc;
 	(void)argv;
 
-	/* Print $ in interactif mode */
 	while (1)
 	{
 		if (interactive)
@@ -29,30 +28,24 @@ int main(int argc, char **argv)
 
 		n = getline(&line, &len, stdin);
 
-		/* EOF - exit ctrl + d */
 		if (n == -1)
 			break;
-		/* remove the final '\n' */
+
 		if (n > 0 && line[n - 1] == '\n')
 		{
 			line[n - 1] = '\0';
 			n--;
 		}
-		/* handle the blank */
-		blank = line;
-		while (*blank == ' ' || *blank == '\t')
-			blank++;
-		if (*blank == '\0')
+
+		args = split_token(line, " \t");
+		if (run_builtins(args, &status, line) == 1)
+		{
+			free_char_arr(args);
 			continue;
+		}
 
-		if (strcmp(blank, "exit") == 0)
-			break;
-
-		args = split_token(blank, " \t");
-		chose_path(args);
-		for (i = 0; args[i] != NULL; i++)
-			free(args[i]);
-		free(args);
+		status = chose_path(args);
+		free_char_arr(args);
 	}
 	free(line);
 	return (0);
