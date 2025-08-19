@@ -17,7 +17,7 @@ int lenght_tok(const char *line, const char *delimiter);
 char **split_token(char *line, char *delimiter)
 {
 	char **argv = NULL;
-	char *tok, *copy;
+	char *tok, *copy, *clean_tok;
 	int i = 0;
 	int n;
 
@@ -44,7 +44,13 @@ char **split_token(char *line, char *delimiter)
 	tok = strtok(copy, delimiter);
 	for (i = 0; tok != NULL; i++)
 	{
-		argv[i] = strdup(tok);
+		clean_tok = tok;
+		if (tok[0] == '"' && tok[strlen(tok) - 1] == '"' && strlen(tok) > 1)
+			{
+				tok[strlen(tok) - 1] = '\0';
+				clean_tok = tok + 1;
+			}
+		argv[i] = strdup(clean_tok);
 		if (argv[i]  == NULL)
 		{
 			while (i > 0)
@@ -59,7 +65,6 @@ char **split_token(char *line, char *delimiter)
 		tok = strtok(NULL, delimiter);
 	}
 	argv[i] = NULL;
-	free(copy);
 	return (argv);
 }
 

@@ -10,7 +10,7 @@ int lenght_tok(const char *line, const char *delimiter);
 int execute_command(char **argv);
 void print_env(void);
 int chose_path(char **argv);
-int run_builtins(char **commands, int *status);
+int run_builtins(char **commands, int *status, char *line);
 void free_char_arr(char **str);
 
 #endif
