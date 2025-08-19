@@ -59,8 +59,7 @@ must use specific compilation processes and have to pass holberton checker
 
 ```bash
 git clone https://github.com/malik31200/holbertonschool-simple_shell
-```
-## 
+``` 
 
 2. Open the repository you've just cloned.
 
@@ -82,6 +81,7 @@ gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh
 echo "/bin/ls" | ./hsh
 ```
 
+## 🚨 known bug
 
 
 ## 🔧 <span id="whats-next">What's next?</span>
