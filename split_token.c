@@ -52,9 +52,9 @@ char **split_token(char *line, char *delimiter)
 				i--;
 				free(argv[i]);
 			}
-		free(copy);
-		free(argv);
-		return (NULL);
+			free(copy);
+			free(argv);
+			return (NULL);
 		}
 		tok = strtok(NULL, delimiter);
 	}
@@ -74,8 +74,10 @@ int lenght_tok(const char *line, const char *delimiter)
 	int i = 0;
 	char *copy, *token;
 
-	if (line == NULL || *line == '\0' ||
-			delimiter == NULL || *delimiter == '\0')
+	if (line == NULL || delimiter == NULL || *delimiter == '\0')
+		return (-1);
+
+	if (*line == '\0')
 		return (0);
 
 	copy = strdup(line);
