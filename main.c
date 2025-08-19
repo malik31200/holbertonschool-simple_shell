@@ -51,7 +51,6 @@ int main(int argc, char **argv)
 			free_char_arr(args);
 			continue;
 		}
-
 		status = chose_path(args);
 		free_char_arr(args);
 	}
