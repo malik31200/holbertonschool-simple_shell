@@ -43,7 +43,7 @@ int main(int argc, char **argv)
 		if (args == NULL)
 			continue;
 			
-		if (run_builtins(args, &status, line) == 1)
+		if (run_builtins(args, &status) == 1)
 		{
 			free_char_arr(args);
 			continue;
