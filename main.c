@@ -33,13 +33,13 @@ int main(int argc, char **argv)
 			free(line);
 			exit(0);
 		}
-
 		if (n > 0 && line[n - 1] == '\n')
 		{
 			line[n - 1] = '\0';
 			n--;
 		}
-
+		if (*line == '\0')
+			continue;
 		args = split_token(line, " \t");
 		if (run_builtins(args, &status, line) == 1)
 		{
