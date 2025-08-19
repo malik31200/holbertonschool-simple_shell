@@ -31,12 +31,28 @@ must use specific compilation processes and have to pass holberton checker
 
 - Display a prompt and wait for the user to type a command. A command line always ends with a new line.
 - The prompt is displayed again each time a command has been executed.
-- If an executable cannot be found, print an error message and display the prompt again.
 - Handle errors.
+- Handle the “end of file” condition (Ctrl+D)
+- Handle command lines with arguments
+- Handle the PATH
+- Fork must not be called if the command doesn’t exist
+
+## 💾 builtins
+- `exit` - exit the shell properly
+- `env` - print the environement variables in the standard output
 
 ## 🔨 <span id="tech-stack">Tech stack</span>
 
 <p align="left">
+<img src="https://img.shields.io/badge/VIM-3EB535?logo=vim&logoColor=white&style=for-the-badge" alt="VIM badge">
+
+<img src="https://img.shields.io/badge/GIT-D68936?logo=git&logoColor=white&style=for-the-badge" alt="GIT badge">
+
+<img src="https://img.shields.io/badge/GITHUB-000000?logo=github&logoColor=white&style=for-the-badge" alt="GITHUB badge">
+
+<img src="https://img.shields.io/badge/C-2FA5BA?logo=c&logoColor=white&style=for-the-badge" alt="C badge">
+
+
 </p>
 
 ## 📂 <span id="files-description">File description</span>
@@ -59,7 +75,8 @@ must use specific compilation processes and have to pass holberton checker
 
 ```bash
 git clone https://github.com/malik31200/holbertonschool-simple_shell
-``` 
+```
+## 
 
 2. Open the repository you've just cloned.
 
