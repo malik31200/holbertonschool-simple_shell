@@ -53,6 +53,8 @@ int main(int argc, char **argv)
 		continue;
 		}
 		execute_command(args);
+		args = split_token(blank, " \t");
+		chose_path(args);
 		for (i = 0; args[i] != NULL; i++)
 			free(args[i]);
 		free(args);

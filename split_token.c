@@ -9,12 +9,12 @@ int lenght_tok(const char *line, const char *delimiter);
 /**
  * split_token - Split a string
  * @line: Line of command.
+ * @delimiter: the delimiter to parse with
  *
  * Return: NULL if failed
  * an array of strings if success.
  */
-char **split_token(char *line)
-
+char **split_token(char *line, char *delimiter)
 {
 	char **argv = NULL;
 	char *tok, *copy;
@@ -24,7 +24,7 @@ char **split_token(char *line)
 	if (line == NULL || *line == '\0')
 		return (NULL);
 
-	n = lenght_tok(line, " \t");
+	n = lenght_tok(line, delimiter);
 	if (n <= 0)
 		return (NULL);
 
@@ -41,7 +41,7 @@ char **split_token(char *line)
 		return (NULL);
 	}
 
-	tok = strtok(copy, " \t");
+	tok = strtok(copy, delimiter);
 	for (i = 0; tok != NULL; i++)
 	{
 		argv[i] = strdup(tok);
@@ -55,7 +55,7 @@ char **split_token(char *line)
 				return (NULL);
 			}
 		}
-		tok = strtok(NULL, " \t");
+		tok = strtok(NULL, delimiter);
 	}
 	argv[i] = NULL;
 	free(copy);
