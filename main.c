@@ -29,7 +29,10 @@ int main(int argc, char **argv)
 		n = getline(&line, &len, stdin);
 
 		if (n == -1)
+		{
+			free(line);
 			exit(0);
+		}
 
 		if (n > 0 && line[n - 1] == '\n')
 		{
