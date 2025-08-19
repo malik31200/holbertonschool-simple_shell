@@ -4,6 +4,9 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <string.h>
+/* Function declaratrions */
+void parse_new_line(char *string, ssize_t *n);
+
 /**
  * main - Entry point of the program.
  * @argc: Number of the arguments
@@ -24,28 +27,22 @@ int main(int argc, char **argv)
 	while (1)
 	{
 		if (interactive)
-			write(STDOUT_FILENO,"($) ", 4);
+			write(STDOUT_FILENO, "($) ", 4);
 
 		n = getline(&line, &len, stdin);
-
 		if (n == -1)
 		{
 			free(line);
 			exit(0);
 		}
-		if (n > 0 && line[n - 1] == '\n')
-		{
-			line[n - 1] = '\0';
-			n--;
-		}
+		parse_new_line(line, &n);
 		if (*line == '\0')
 			continue;
+
 		args = split_token(line, " \t");
 		if (args == NULL)
-			{
-				free(line);
-				continue;
-			}
+			continue;
+
 		if (run_builtins(args, &status, line) == 1)
 		{
 			free_char_arr(args);
@@ -56,4 +53,25 @@ int main(int argc, char **argv)
 	}
 	free(line);
 	return (0);
+}
+
+/**
+* parse_new_line - get rid of the new line
+* @line: the line to parse
+* @n: the length of the line
+*
+*
+* Return: void
+*/
+void parse_new_line(char *line, ssize_t *n)
+{
+	if (line == NULL)
+		return;
+
+	if (*n > 0 && line[*n - 1] == '\n')
+	{
+		line[*n - 1] = '\0';
+		*n = *n - 1;
+	}
+
 }
