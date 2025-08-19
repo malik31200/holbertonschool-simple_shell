@@ -45,7 +45,8 @@ char **split_token(char *line, char *delimiter)
 	for (i = 0; tok != NULL; i++)
 	{
 		clean_tok = tok;
-		if (tok[0] == '"' && tok[strlen(tok) - 1] == '"' && strlen(tok) > 1)
+		if ((tok[0] == '"' && tok[strlen(tok) - 1] == '"' && strlen(tok) > 1) ||
+			(tok[0] == '\'' && tok[strlen(tok) - 1] == '\'' && strlen(tok) > 1) )
 		{
 			tok[strlen(tok) - 1] = '\0';
 			clean_tok = tok + 1;
