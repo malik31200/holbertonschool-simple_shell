@@ -39,12 +39,12 @@ int no_path(char **argv)
 {
 	if (access(argv[0], F_OK) == -1)
 	{
-		fprintf(stderr, "hsh: %s: command not found\n", argv[0]);
+		fprintf(stderr, "./hsh: %s: command not found\n", argv[0]);
 		return (127);
 	}
 	if (access(argv[0], X_OK) == -1)
 	{
-		fprintf(stderr, "hsh: %s: permission denied\n", argv[0]);
+		fprintf(stderr, "./hsh: %s: permission denied\n", argv[0]);
 		return (126);
 	}
 	return (execute_command(argv));
@@ -79,9 +79,9 @@ int find_the_path(char **argv)
 	free(path);
 	ret = search_path(arr_path, argv);
 	if (ret == 127)
-		fprintf(stderr, "hsh: %s: command not found\n", argv[0]);
+		fprintf(stderr, "./hsh: %s: command not found\n", argv[0]);
 	if (ret == 126)
-		fprintf(stderr, "hsh: %s: permission denied\n", argv[0]);
+		fprintf(stderr, "./hsh: %s: permission denied\n", argv[0]);
 
 	free_char_arr(arr_path);
 	return (ret);
