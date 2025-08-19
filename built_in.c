@@ -28,7 +28,7 @@ void print_env(void)
  * Return: 0 if builtins no found
  * 1 if it found
  */
-int run_builtins(char **commands, int *status, char *line)
+int run_builtins(char **commands, int *status)
 {
 	if (commands == NULL || commands[0] == NULL)
 		return (0);
@@ -37,7 +37,6 @@ int run_builtins(char **commands, int *status, char *line)
 	{
 		*status = 0;
 		free_char_arr(commands);
-		free(line);
 		exit(*status);
 	}
 	if (strcmp(commands[0], "env") == 0)
