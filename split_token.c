@@ -52,8 +52,9 @@ char **split_token(char *line, char *delimiter)
 				i--;
 				free(argv[i]);
 				free(copy);
-				return (NULL);
 			}
+		free(argv);
+		return (NULL);
 		}
 		tok = strtok(NULL, delimiter);
 	}
