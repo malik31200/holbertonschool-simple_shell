@@ -41,6 +41,11 @@ int main(int argc, char **argv)
 		if (*line == '\0')
 			continue;
 		args = split_token(line, " \t");
+		if (args == NULL)
+			{
+				free(line);
+				continue;
+			}
 		if (run_builtins(args, &status, line) == 1)
 		{
 			free_char_arr(args);
