@@ -24,7 +24,7 @@ int main(int argc, char **argv)
 	while (1)
 	{
 		if (interactive)
-			write(STDOUT_FILENO,"($) ", 4);
+			write(STDOUT_FILENO, "($) ", 4);
 
 		n = getline(&line, &len, stdin);
 
@@ -43,7 +43,6 @@ int main(int argc, char **argv)
 		args = split_token(line, " \t");
 		if (args == NULL)
 			{
-				free(line);
 				continue;
 			}
 		if (run_builtins(args, &status, line) == 1)
