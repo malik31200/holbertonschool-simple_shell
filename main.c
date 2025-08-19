@@ -16,7 +16,7 @@ int main(int argc, char **argv)
 	ssize_t n = -1;
 	size_t len = 0;
 	int interactive = isatty(STDIN_FILENO);
-	int status;
+	int status = 0;
 
 	(void)argc;
 	(void)argv;
@@ -29,7 +29,7 @@ int main(int argc, char **argv)
 		n = getline(&line, &len, stdin);
 
 		if (n == -1)
-			break;
+			exit(status);
 
 		if (n > 0 && line[n - 1] == '\n')
 		{
