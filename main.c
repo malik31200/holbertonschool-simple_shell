@@ -1,4 +1,5 @@
 #include "shell.h"
+#include "env.h"
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
@@ -11,11 +12,11 @@
  */
 int main(int argc, char **argv)
 {
-	char *line = NULL, *blank, **args = NULL;
+	char *line = NULL, **args = NULL;
 	ssize_t n = -1;
 	size_t len = 0;
 	int interactive = isatty(STDIN_FILENO);
-	int i = 0;
+	int status;
 
 	(void)argc;
 	(void)argv;
@@ -29,35 +30,22 @@ int main(int argc, char **argv)
 
 		if (n == -1)
 			break;
-		/* remove the final '\n' */
+
 		if (n > 0 && line[n - 1] == '\n')
 		{
 			line[n - 1] = '\0';
 			n--;
 		}
-		blank = line;
-		while (*blank == ' ' || *blank == '\t')
-			blank++;
-		if (*blank == '\0')
-			continue;
 
-		if (strcmp(blank, "exit") == 0)
-			break;
-		args = split_token(blank);
-		if (args[0] != NULL && strcmp(args[0], "env") == 0)
+		args = split_token(line, " \t");
+		if (run_builtins(args, &status, line) == 1)
 		{
-			print_env();
-		for (i = 0; args[i] != NULL; i++)
-			free(args[i]);
-		free(args);
-		continue;
+			free_char_arr(args);
+			continue;
 		}
-		execute_command(args);
-		args = split_token(blank, " \t");
-		chose_path(args);
-		for (i = 0; args[i] != NULL; i++)
-			free(args[i]);
-		free(args);
+
+		status = chose_path(args);
+		free_char_arr(args);
 	}
 	free(line);
 	return (0);
