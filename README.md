@@ -60,8 +60,7 @@ must use specific compilation processes and have to pass holberton checker
 - Fork must not be called if the command doesn’t exist
 
 ## 📝 <span id="feature">Feature</span>
-- `exit` builtin allows exit of the shell
-- `env` builtin print the environement variables
+- builtins such as `exit`, `env` etc...
 - handle abstract commands like `ls`, `pwd` etc..
 - handle relative or absolute command path `/bin/ls`
 - handles arguments like `ls -la`
