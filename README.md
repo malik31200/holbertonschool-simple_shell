@@ -17,6 +17,8 @@
   <br>
   💾 <a href="#builtins">Builtins</a>
   <br>
+  🗒️ <a href="#man">Man</a> 
+  <br>
   📂 <a href="#files-description">Files description</a>
   <br>
   💻 <a href="#installation">Installation</a>
@@ -69,7 +71,22 @@ The project was regularly tested with valgrind to prevent memory leaks
 ```
 
 This proves that the project is memory safe and leak free.
+## 🗒️ <span id="man">Man</span>
+### groff
+Install groff
+```bash
+sudo apt get install groff
+```
+Run groff
+```bash
+groff -k -Tutf8 -man man_1_simple_shell
+```
 
+### man
+Run
+```bash
+man ./man_1_simple_shell
+```
 ## 💾 <span id="builtins">Builtins</span>
 - `exit` - exit the shell properly
 - `env` - print the environement variables in the standard output
@@ -105,9 +122,6 @@ This proves that the project is memory safe and leak free.
 | [`path_or_no_path.c`](https://github.com/malik31200/holbertonschool-simple_shell/blob/main/path_or_no_path.c)       | COntains utility functions for dealing with abstract commands like `ls` and absolute path ones like `/bin/ls`|
 | [`shell.h`](https://github.com/malik31200/holbertonschool-simple_shell/blob/main/shell.h)       | Header file containing all the necessary functions to run the shell |
 | [`split_token.c`](https://github.com/malik31200/holbertonschool-simple_shell/blob/main/split_token.c)       | Contain Utility functions for dealing with tokens |
-
-
-
 
 ## 💻 <span id="installation">Installation</span>
 
@@ -159,7 +173,7 @@ AUTHORS  build  built_in.c  env.c  env.h  execute.c  exercice_shell  hack  hsh  
 
 ## ♥️ <span id="thanks">Thanks</span>
 
-- Your message of thanks here. 
+Thanks for my peers, Franck, Hugo for the help during the project
 
 ## 👷 <span id="authors">Authors</span>
 
