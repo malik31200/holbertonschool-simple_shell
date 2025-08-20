@@ -11,9 +11,19 @@
   <br>
   🔨 <a href="#tech-stack">Tech stack</a>
   <br>
+  📝 <a href="#feature">Feature</a>
+  <br>
+  👾 <a href="#valgrind">Valgrind</a>
+  <br>
+  💾 <a href="#builtins">Builtins</a>
+  <br>
   📂 <a href="#files-description">Files description</a>
   <br>
   💻 <a href="#installation">Installation</a>
+  <br>
+  🔍 <a href="#how-to-use">How to Use</a>
+  <br>
+  🚨 <a href="#known-bug">Known bug</a> 
   <br>
   🔧 <a href="#whats-next">What's next?</a>
   <br>
@@ -37,7 +47,30 @@ must use specific compilation processes and have to pass holberton checker
 - Handle the PATH
 - Fork must not be called if the command doesn’t exist
 
-## 💾 builtins
+## 📝 <span id="feature">Feature</span>
+- `exit` builtin allows exit of the shell
+- `env` builtin print the environement variables
+- handle abstract commands like `ls`, `pwd` etc..
+- handle relative or absolute command path `/bin/ls`
+- handles arguments like `ls -la`
+
+## 👾 <span id="valgrind">Valgrind</span>
+
+The project was regularly tested with valgrind to prevent memory leaks
+```bash
+==4358==
+==4358== HEAP SUMMARY:
+==4358==     in use at exit: 0 bytes in 0 blocks
+==4358==   total heap usage: 104 allocs, 104 frees, 4,270 bytes allocated
+==4358==
+==4358== All heap blocks were freed -- no leaks are possible
+==4358==
+==4358== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+```
+
+This proves that the project is memory safe and leak free.
+
+## 💾 <span id="builtins">Builtins</span>
 - `exit` - exit the shell properly
 - `env` - print the environement variables in the standard output
 
@@ -52,17 +85,27 @@ must use specific compilation processes and have to pass holberton checker
 
 <img src="https://img.shields.io/badge/C-2FA5BA?logo=c&logoColor=white&style=for-the-badge" alt="C badge">
 
-
 </p>
 
 ## 📂 <span id="files-description">File description</span>
 
 | **FILE**            | **DESCRIPTION**                                   |
 | :-----------------: | ------------------------------------------------- |
-| `file_name`       | Description of the file.                          |
-| `folder_name`     | Description of the folder.                        |
-| `.gitignore`      | Specifies files and folders to be ignored by Git. |
-| `README.md`       | The README file you are currently reading 😉.     |
+| [`.gitignore`](https://github.com/malik31200/holbertonschool-simple_shell/blob/main/.gitignore)       | A file that defines the rules for what the repo accepts or not                          |
+| [`README.md`](https://github.com/malik31200/holbertonschool-simple_shell/blob/main/README.md)     | Doc README.md file                       |
+| [`man_1_simple_shell`](https://github.com/malik31200/holbertonschool-simple_shell/blob/main/man_1_simple_shell)      | man page for the simple shell project |
+| [`AUTHORS`](https://github.com/malik31200/holbertonschool-simple_shell/blob/main/AUTHORS)      | Automatically generated Author page     |
+| [`hack`](https://github.com/malik31200/holbertonschool-simple_shell/tree/main/hack)       | Contain utility tools for generating AUTHOR files   |
+| [`built_in.c`](https://github.com/malik31200/holbertonschool-simple_shell/blob/main/built_in.c)       | Contains functions to deal with builtins `env` `exit`|
+| [`env.c`](https://github.com/malik31200/holbertonschool-simple_shell/blob/main/env.c)       | Contains utility functions for the environement to deal with path |
+| [`env.h`](https://github.com/malik31200/holbertonschool-simple_shell/blob/main/env.h)       | Header file for env utilities |
+| [`execute.c`](https://github.com/malik31200/holbertonschool-simple_shell/blob/main/execute.c)       | Contains utility function that deals with executing a command |
+| [`main.c`](https://github.com/malik31200/holbertonschool-simple_shell/blob/main/main.c)       | Program entry point |
+| [`memory.c`](https://github.com/malik31200/holbertonschool-simple_shell/blob/main/memory.c)       | Contains utility functions for dealing with memory |
+| [`path_or_no_path.c`](https://github.com/malik31200/holbertonschool-simple_shell/blob/main/path_or_no_path.c)       | COntains utility functions for dealing with abstract commands like `ls` and absolute path ones like `/bin/ls`|
+| [`shell.h`](https://github.com/malik31200/holbertonschool-simple_shell/blob/main/shell.h)       | Header file containing all the necessary functions to run the shell |
+| [`split_token.c`](https://github.com/malik31200/holbertonschool-simple_shell/blob/main/split_token.c)       | Contain Utility functions for dealing with tokens |
+
 
 
 
@@ -76,7 +119,6 @@ must use specific compilation processes and have to pass holberton checker
 ```bash
 git clone https://github.com/malik31200/holbertonschool-simple_shell
 ```
-## 
 
 2. Open the repository you've just cloned.
 
@@ -86,7 +128,7 @@ git clone https://github.com/malik31200/holbertonschool-simple_shell
 gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh
 ```
 
-## 🔍 How to use
+## 🔍 <span id="how-to-use">How to use</span>
 ### run (interactive mode)
 ```bash
 ./hsh
@@ -98,8 +140,8 @@ gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh
 echo "/bin/ls" | ./hsh
 ```
 
-## 🚨 known bug
-
+## 🚨 <span id="known-bug">Known bug</span>
+- no known bugs were found so far
 
 ## 🔧 <span id="whats-next">What's next?</span>
 
