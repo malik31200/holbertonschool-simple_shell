@@ -84,7 +84,7 @@ This proves that the project is memory safe and leak free.
 ### groff
 Install groff
 ```bash
-sudo apt get install groff
+sudo apt-get install groff
 ```
 Run groff
 ```bash
