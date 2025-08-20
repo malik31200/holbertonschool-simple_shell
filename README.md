@@ -134,11 +134,18 @@ gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh
 ./hsh
 ```
 
+```bash
+($) /bin/ls
+AUTHORS  build  built_in.c  env.c  env.h  execute.c  exercice_shell  hack  hsh  main.c  man_1_simple_shell  memory.c  obj  path_or_no_path.c  README.md  shell.h  split_token.c  test_ls_2
+($) exit
+```
 
 ### run (non interactive mode)
 ```bash
 echo "/bin/ls" | ./hsh
+AUTHORS  build  built_in.c  env.c  env.h  execute.c  exercice_shell  hack  hsh  main.c  man_1_simple_shell  memory.c  obj  path_or_no_path.c  README.md  shell.h  split_token.c  test_ls_2
 ```
+
 
 ## 🚨 <span id="known-bug">Known bug</span>
 - no known bugs were found so far
