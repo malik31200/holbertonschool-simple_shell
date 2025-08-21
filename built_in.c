@@ -35,7 +35,6 @@ int run_builtins(char **commands, int *status, char *line)
 
 	if (strcmp(commands[0], "exit") == 0)
 	{
-		*status = 0;
 		free_char_arr(commands);
 		free(line);
 		exit(*status);
@@ -43,7 +42,6 @@ int run_builtins(char **commands, int *status, char *line)
 	if (strcmp(commands[0], "env") == 0)
 	{
 		print_env();
-		*status = 0;
 		return (1);
 	}
 
